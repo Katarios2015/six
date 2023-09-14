@@ -1,10 +1,11 @@
 import React from "react";
-import Card from "../card/card";
 import PropTypes from 'prop-types';
-import {nanoid} from 'nanoid';
+import CardsList from '../cards-list/cards-list';
+import {CARD_PROP_TYPES} from '../../const/const';
+import {Link} from "react-router-dom";
 
 const MainPage = (props) => {
-  const {cardsCount} = props;
+  const {offers} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -18,11 +19,12 @@ const MainPage = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link to="/favorites" className="header__nav-link header__nav-link--profile" >
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
+
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -87,12 +89,10 @@ const MainPage = (props) => {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {new Array(cardsCount).fill().map(()=><Card key={nanoid()}/>)}
-              </div>
+              <CardsList items={offers}/>
             </section>
             <div className="cities__right-section">
-              <secition className="cities__map map" />
+              <section className="cities__map map" />
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  cardsCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired
 };
 
 export default MainPage;

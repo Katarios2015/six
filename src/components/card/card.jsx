@@ -1,24 +1,39 @@
 import React from "react";
+import PropTypes from "prop-types";
+import {CARD_PROP_TYPES} from "../../const/const";
+import {Link} from "react-router-dom";
 
-const Card = () => {
+const Card = (props) => {
+  const {item, onMouseOver, onMouseOut} = props;
+  const {id, isPremium, isFavorite, price, images, title, type} = item;
 
+  const handleCardMouseOver = () => {
+    onMouseOver(item);
+  };
+
+  const handleCardMouseOut = () => {
+    onMouseOut(null);
+  };
   return (
-    <article className="cities__place-card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
+    <article
+      onMouseOver={handleCardMouseOver}
+      onMouseOut={handleCardMouseOut}
+      className="cities__place-card place-card">
+      <div className={isPremium ? `place-card__mark` : ``}>
+        <span>{isPremium ? `Premium` : ``}</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width={260} height={200} alt="Place image" />
-        </a>
+        <Link to={`offer/${id}`}>
+          <img className="place-card__image" src={images[0]} width={260} height={200} alt="Place image" />
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€120</b>
+            <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button className={isFavorite ? `place-card__bookmark-button place-card__bookmark-button--active button` : `place-card__bookmark-button button`}type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
@@ -32,12 +47,20 @@ const Card = () => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Beautiful &amp; luxurious apartment at great location</a>
+          <Link to={`offer/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
 };
 
+Card.propTypes = {
+  item: CARD_PROP_TYPES.isRequired,
+  onMouseOver: PropTypes.func.isRequired,
+  onMouseOut: PropTypes.func.isRequired,
+};
+
+
 export default Card;
+
