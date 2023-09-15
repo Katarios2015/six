@@ -22,8 +22,8 @@ const offers = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 8
     },
     maxAdults: 4,
@@ -37,8 +37,8 @@ const offers = [
     bedrooms: 4,
     city: {
       location: {
-        latitude: 48.856663,
-        longitude: 2.351556,
+        latitude: 52.370216,
+        longitude: 4.895168,
         zoom: 10
       },
       name: `Paris`
@@ -56,8 +56,8 @@ const offers = [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 548.859887,
-      longitude: 2.349220,
+      latitude: 52.369553943508,
+      longitude: 4.85309666406198,
       zoom: 8
     },
     maxAdults: 4,
@@ -71,8 +71,8 @@ const offers = [
     bedrooms: 5,
     city: {
       location: {
-        latitude: 48.856663,
-        longitude: 2.351556,
+        latitude: 52.370216,
+        longitude: 4.895168,
         zoom: 10
       },
       name: `Cologne`
@@ -90,8 +90,8 @@ const offers = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 50.934367,
-      longitude: 6.950412,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 8
     },
     maxAdults: 4,
@@ -105,8 +105,8 @@ const offers = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 50.846697,
-        longitude: 4.352544,
+        latitude: 52.370216,
+        longitude: 4.895168,
         zoom: 10
       },
       name: `Brussels`
@@ -124,8 +124,8 @@ const offers = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 50.856117,
-      longitude: 4.360602,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 8
     },
     maxAdults: 4,
@@ -153,7 +153,7 @@ const reviews = [
   {
     comment: `A quiet cozy`,
     date: `2019-05-08T14:13:56.569Z`,
-    id: 1,
+    id: 2,
     rating: 4,
     user: {
       avatarUrl: `img/1.png`,
@@ -165,7 +165,7 @@ const reviews = [
   {
     comment: `the unique lightness of Amsterdam.`,
     date: `2019-05-08T14:13:56.569Z`,
-    id: 1,
+    id: 3,
     rating: 4,
     user: {
       avatarUrl: `img/1.png`,
@@ -177,7 +177,7 @@ const reviews = [
   {
     comment: `hides behind a river`,
     date: `2019-05-08T14:13:56.569Z`,
-    id: 1,
+    id: 4,
     rating: 4,
     user: {
       avatarUrl: `img/1.png`,
