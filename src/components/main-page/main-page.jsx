@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import CardsList from '../cards-list/cards-list';
+import Map from '../map/map';
 import {CARD_PROP_TYPES} from '../../const/const';
 import {Link} from "react-router-dom";
 
@@ -92,7 +93,9 @@ const MainPage = (props) => {
               <CardsList items={offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <Map mapOffers={offers}/>
+              </section>
             </div>
           </div>
         </div>

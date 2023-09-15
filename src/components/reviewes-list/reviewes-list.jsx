@@ -7,14 +7,18 @@ import {REVIEW_PROP_TYPES} from '../../const/const';
 const ReviewesList = (props) => {
   const {reviews} = props;
   return (
-    <ul className="reviews__list">
-      {reviews.map((item)=>{
-        return (<Review key={item.id}
-          reviewItem={item}
-        />);
+    <>
+      <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
+      <ul className="reviews__list">
+        {reviews.map((item)=>{
+          return (<Review key={item.id}
+            reviewItem={item}
+          />);
 
-      })}
-    </ul>
+        })}
+      </ul>
+    </>
+
   );
 };
 

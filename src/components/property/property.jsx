@@ -1,11 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
-import {CARD_PROP_TYPES} from "../../const/const";
+import {CARD_PROP_TYPES, REVIEW_PROP_TYPES} from "../../const/const";
 import ReviewForm from "../review-form/review-form";
 import ReviewesList from "../reviewes-list/reviewes-list";
+import Map from '../map/map';
+
 const Property = (props) => {
-  const {propertyReviews} = props;
+  const {propertyReviews, nearOffers} = props;
   return (
     <div className="page">
       <header className="header">
@@ -151,13 +153,14 @@ const Property = (props) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews · <span className="reviews__amount">1</span></h2>
                 <ReviewesList reviews={propertyReviews}/>
                 <ReviewForm/>
               </section>
             </div>
           </div>
-          <section className="property__map map" />
+          <section className="property__map map">
+            <Map mapOffers={nearOffers}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -266,7 +269,8 @@ const Property = (props) => {
 
 
 Property.propTypes = {
-  propertyReviews: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
+  propertyReviews: PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired,
+  nearOffers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired
 
 };
 

@@ -23,7 +23,9 @@ const App = (props) => {
           <Favorities favoriteCards={offers}/>
         </Route>
         <Route exact path="/offer/:id">
-          <Property propertyReviews={reviews}/>
+          <Property
+            propertyReviews={reviews}
+            nearOffers={offers.slice(0, 3)}/>
         </Route>
         <Route>
           <NotFound/>
