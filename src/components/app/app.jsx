@@ -25,7 +25,8 @@ const App = (props) => {
         <Route exact path="/offer/:id">
           <Property
             propertyReviews={reviews}
-            nearOffers={offers.slice(0, 3)}/>
+            nearOffers={offers.slice(0, 3)}
+            nearby={true}/>
         </Route>
         <Route>
           <NotFound/>
@@ -38,7 +39,8 @@ const App = (props) => {
 
 App.propTypes = {
   offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
-  reviews: PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired
+  reviews: PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired,
+  nearby: PropTypes.bool
 };
 
 export default App;

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {CARD_PROP_TYPES} from '../../const/const';
 
 const CardsList = (props) => {
-  const {items} = props;
+  const {items, nearbyFlag} = props;
   const [activeCard, setActiveCard] = useState(null);
   const handleCardMouseOver = (item) => {
     setActiveCard(item);
@@ -14,9 +14,9 @@ const CardsList = (props) => {
   const handleCardMouseOut = () => {
     setActiveCard(null);
   };
-console.log(activeCard);
+  console.log(activeCard);
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={`places__list ${nearbyFlag === false ? `cities__places-list  tabs__content` : `near-places__list`}`}>
       {items.map((offer) => {
         return (
           <Card
@@ -24,6 +24,7 @@ console.log(activeCard);
             key={offer.id}
             onMouseOver={handleCardMouseOver}
             onMouseOut={handleCardMouseOut}
+            nearbyFlagCard = {nearbyFlag}
           />
         );
       })}
@@ -33,7 +34,8 @@ console.log(activeCard);
 };
 
 CardsList.propTypes = {
-  items: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired
+  items: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
+  nearbyFlag: PropTypes.bool
 };
 
 export default CardsList;
