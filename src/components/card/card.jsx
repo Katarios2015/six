@@ -4,7 +4,7 @@ import {CARD_PROP_TYPES} from "../../const/const";
 import {Link} from "react-router-dom";
 
 const Card = (props) => {
-  const {item, onMouseOver, onMouseOut, nearbyFlagCard} = props;
+  const {item, onMouseOver, onMouseOut, className, classNameWrapper, nearbyFlagCard} = props;
   const {id, isPremium, isFavorite, price, images, title, type} = item;
 
   const handleCardMouseOver = () => {
@@ -18,14 +18,12 @@ const Card = (props) => {
     <article
       onMouseOver={handleCardMouseOver}
       onMouseOut={handleCardMouseOut}
-      className={`place-card ${nearbyFlagCard === false ? `cities__place-card` :
-        `near-places__card`}`}>
+      className={`place-card ${className}`}>
       <div className={isPremium ? `place-card__mark` : ``}>
         <span>{isPremium ? `Premium` : ``}</span>
       </div>
-      <div className={`place-card__image-wrapper ${nearbyFlagCard === false ? `cities__image-wrapper` :
-        `near-places__image-wrapper`}`}>
-        <Link to={`${nearbyFlagCard === false ? `offer/${id}` : `${id}`}`}>
+      <div className={`place-card__image-wrapper ${classNameWrapper}`}>
+        <Link to={`${nearbyFlagCard === false ? `offer/${id}` : `${id}`}`} target="_blank">
           <img className="place-card__image" src={images[0]} width={260} height={200} alt="Place image" />
         </Link>
       </div>
@@ -61,7 +59,9 @@ Card.propTypes = {
   item: CARD_PROP_TYPES.isRequired,
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
-  nearbyFlagCard: PropTypes.bool.isRequired
+  nearbyFlagCard: PropTypes.bool.isRequired,
+  className: PropTypes.string.isRequired,
+  classNameWrapper: PropTypes.string.isRequired,
 };
 
 
