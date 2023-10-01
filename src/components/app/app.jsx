@@ -9,12 +9,12 @@ import Property from "../property/property";
 import {CARD_PROP_TYPES, REVIEW_PROP_TYPES} from '../../const/const';
 
 const App = (props) => {
-  const {offers, reviews} = props;
+  const {offers, reviews, cities} = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainPage offers={offers}/>
+          <MainPage cities={cities}/>
         </Route>
         <Route exact path="/login">
           <Login/>
@@ -40,6 +40,7 @@ const App = (props) => {
 App.propTypes = {
   offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
   reviews: PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   nearby: PropTypes.bool
 };
 

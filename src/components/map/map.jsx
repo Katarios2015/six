@@ -7,7 +7,7 @@ import {CARD_PROP_TYPES} from "../../const/const";
 const Map = (props) => {
   const {mapOffers} = props;
   const mapRef = useRef();
-  const city = [52.38333, 4.9];
+  const city = [mapOffers[0].city.location.latitude, mapOffers[0].city.location.longitude];
   const zoom = 12;
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {

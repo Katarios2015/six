@@ -37,8 +37,8 @@ const offers = [
     bedrooms: 4,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 48.856657,
+        longitude: 2.351543,
         zoom: 10
       },
       name: `Paris`
@@ -56,8 +56,42 @@ const offers = [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 52.369553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.857813,
+      longitude: 2.353209,
+      zoom: 8
+    },
+    maxAdults: 4,
+    previewImage: `img/1.png`,
+    price: 80,
+    rating: 4.8,
+    title: `Beautiful & luxurious room at great location`,
+    type: `room`
+  },
+  {
+    bedrooms: 4,
+    city: {
+      location: {
+        latitude: 48.856657,
+        longitude: 2.351543,
+        zoom: 10
+      },
+      name: `Paris`
+    },
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`],
+    host: {
+      avatarUrl: `img/1.png`,
+      id: 4,
+      isPro: true,
+      name: `Kate`
+    },
+    id: 22,
+    images: [`img/apartment-02.jpg`, `img/apartment-03.jpg`],
+    isFavorite: false,
+    isPremium: false,
+    location: {
+      latitude: 48.840887,
+      longitude: 2.348520,
       zoom: 8
     },
     maxAdults: 4,
@@ -188,4 +222,10 @@ const reviews = [
   },
 ];
 
-export {offers, reviews};
+const getDefaultLocations = (items, defaultCity) => {
+  const filtredItems = items.filter((item) => item.city.name === defaultCity);
+  const locations = filtredItems.map((item) => item.location);
+  return locations;
+};
+
+export {offers, reviews, getDefaultLocations};
