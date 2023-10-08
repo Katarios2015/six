@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {CARD_PROP_TYPES, REVIEW_PROP_TYPES} from "../../const/const";
 import ReviewForm from "../review-form/review-form";
 import ReviewesList from "../reviewes-list/reviewes-list";
-import Map from '../map/map';
+import {Map} from '../map/map';
 import CardsList from '../cards-list/cards-list';
 
 const Property = (props) => {

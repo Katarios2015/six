@@ -37,6 +37,6 @@
     "react-redux": "7.2.9",
     "react-router-dom": "^5.2.1",
     "redux": "^4.2.1",
-    "redux-devtools-extension": "2.13.9"
+    "redux-devtools-extension": "^2.13.9"
   }
 }

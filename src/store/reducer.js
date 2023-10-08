@@ -1,11 +1,11 @@
 import {DEFAULT_CITY} from "../const/const";
-import {offers} from "../mocks/offers";
+// import {offers} from "../mocks/offers";
 import {ActionType} from "../store/action";
 
 
 const initialState = {
   cityName: DEFAULT_CITY,
-  propertyes: offers.filter((offer) => offer.city.name === DEFAULT_CITY),
+  propertyes: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.ADD_PROPERTYES:
       return {
         ...state,
-        propertyes: offers.action.payload,
+        propertyes: action.payload,
       };
 
     default: return state;

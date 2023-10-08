@@ -227,5 +227,4 @@ const getDefaultLocations = (items, defaultCity) => {
   const locations = filtredItems.map((item) => item.location);
   return locations;
 };
-
 export {offers, reviews, getDefaultLocations};

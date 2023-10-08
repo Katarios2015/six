@@ -7,9 +7,12 @@ import {CARD_PROP_TYPES} from '../../const/const';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 
+import {ActionCreator} from "../../store/action";
+
 const MainPage = (props) => {
-  const {propertyes, cities, cityName} = props;
+  const {offers, propertyes, cities, cityName} = props;
   const placesCount = propertyes.length;
+console.log(propertyes);
   return (
     <>
       <div style={{display: `none`}}>
@@ -66,7 +69,7 @@ const MainPage = (props) => {
                     <li className="places__option" tabIndex={0}>Top rated first</li>
                   </ul>
                 </form>
-                <CardsList items={propertyes} nearbyFlag={false}/>
+                <CardsList offers={offers} nearbyFlag={false}/>
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
@@ -78,7 +81,6 @@ const MainPage = (props) => {
         </main>
       </div>
     </>
-
   );
 };
 
@@ -90,9 +92,17 @@ const mapStateToProps = (state) => ({
 
 MainPage.propTypes = {
   propertyes: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
+  offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  cityName: PropTypes.string.isRequired
+  cityName: PropTypes.string.isRequired,
 };
 
+
+const mapDispatchToProps = (dispatch) => ({
+  addPropertyes(propertyes) {
+    dispatch(ActionCreator.addPropertyes(propertyes));
+  },
+});
+
 export {MainPage};
-export default connect(mapStateToProps, null)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
