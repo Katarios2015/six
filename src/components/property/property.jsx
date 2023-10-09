@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import {CARD_PROP_TYPES, REVIEW_PROP_TYPES} from "../../const/const";
 import ReviewForm from "../review-form/review-form";
 import ReviewesList from "../reviewes-list/reviewes-list";
-import Map from '../map/map';
+import {Map} from '../map/map';
 import CardsList from '../cards-list/cards-list';
 
 const Property = (props) => {
-  const {propertyReviews, nearOffers} = props;
+  const {offers, propertyReviews, nearOffers} = props;
   return (
     <div className="page">
       <header className="header">
@@ -166,7 +166,7 @@ const Property = (props) => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardsList items={nearOffers} nearbyFlag={true}/>
+            <CardsList offers={offers} items={nearOffers} nearbyFlag={true}/>
           </section>
         </div>
       </main>
@@ -177,7 +177,8 @@ const Property = (props) => {
 
 Property.propTypes = {
   propertyReviews: PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired,
-  nearOffers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired
+  nearOffers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
+  offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
 
 };
 

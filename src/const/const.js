@@ -49,5 +49,8 @@ const REVIEW_PROP_TYPES = PropTypes.shape({
   })
 });
 
+const DEFAULT_CITY = `Paris`;
 
-export {CARD_PROP_TYPES, REVIEW_PROP_TYPES};
+const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+
+export {CARD_PROP_TYPES, REVIEW_PROP_TYPES, DEFAULT_CITY, cities};
