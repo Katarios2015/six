@@ -12,7 +12,6 @@ import {ActionCreator} from "../../store/action";
 const MainPage = (props) => {
   const {offers, propertyes, cities, cityName} = props;
   const placesCount = propertyes.length;
-console.log(propertyes);
   return (
     <>
       <div style={{display: `none`}}>

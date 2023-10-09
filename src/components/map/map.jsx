@@ -10,7 +10,6 @@ const getLocation = (array, city) => {
     let firstChild = array[0];
     if (firstChild) {
       location = firstChild.city.location;
-      console.log(location);
     } else {
       const cityLocations = {
         'Amsterdam': [52.373057, 4.892557],
