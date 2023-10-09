@@ -1,4 +1,5 @@
 import React from "react";
+import {StrictMode} from 'react';
 import ReactDOM from "react-dom";
 import {legacy_createStore as createStore} from 'redux';
 import {Provider} from "react-redux";
@@ -14,13 +15,16 @@ const store = createStore(
 );
 
 ReactDOM.render(
-    <Provider store = {store}>
-      <App
-        offers = {offers}
-        reviews = {reviews}
-        cities = {cities}
-      />
-    </Provider>,
+    <StrictMode>
+      <Provider store = {store}>
+
+        <App
+          offers = {offers}
+          reviews = {reviews}
+          cities = {cities}
+        />
+      </Provider>
+    </StrictMode>,
     document.querySelector(`#root`)
 );
 

@@ -3,7 +3,6 @@ import CardNearby from "../card-nearby/card-nearby";
 import CardCities from "../card-cities/card-cities";
 import PropTypes from 'prop-types';
 import {CARD_PROP_TYPES} from '../../const/const';
-// import {getFiltredByCityOffers} from "../../filter";
 import {ActionCreator} from "../../store/action";
 import {connect} from 'react-redux';
 import {useEffect} from 'react';

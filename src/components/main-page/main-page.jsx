@@ -73,7 +73,7 @@ console.log(propertyes);
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map mapOffers={propertyes}/>
+                  <Map cityName={cityName} mapOffers={propertyes}/>
                 </section>
               </div>
             </div>

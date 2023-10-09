@@ -24,6 +24,7 @@ const App = (props) => {
         </Route>
         <Route exact path="/offer/:id">
           <Property
+            offers={offers}
             propertyReviews={reviews}
             nearOffers={offers.slice(0, 3)}
             nearby={true}/>

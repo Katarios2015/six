@@ -222,9 +222,5 @@ const reviews = [
   },
 ];
 
-const getDefaultLocations = (items, defaultCity) => {
-  const filtredItems = items.filter((item) => item.city.name === defaultCity);
-  const locations = filtredItems.map((item) => item.location);
-  return locations;
-};
-export {offers, reviews, getDefaultLocations};
+
+export {offers, reviews};
