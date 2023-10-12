@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import CardsList from '../cards-list/cards-list';
 import CitiesList from '../cities-list/cities-list';
@@ -12,6 +12,13 @@ import {ActionCreator} from "../../store/action";
 const MainPage = (props) => {
   const {offers, propertyes, cities, cityName, sortList, sortType} = props;
   const placesCount = propertyes.length;
+  const [activeCard, setActiveCard] = useState(null);
+  const handleCardMouseOver = (item) => {
+    setActiveCard(item);
+  };
+  const handleCardMouseOut = () => {
+    setActiveCard(null);
+  };
   return (
     <>
       <div style={{display: `none`}}>
@@ -59,11 +66,18 @@ const MainPage = (props) => {
                 <CardsList
                   offers={offers}
                   nearbyFlag={false}
-                  sortType={sortType}/>
+                  sortType={sortType}
+                  handleCardMouseOver = {handleCardMouseOver}
+                  handleCardMouseOut = {handleCardMouseOut}
+                />
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map cityName={cityName} mapOffers={propertyes}/>
+                  <Map
+                  cityName={cityName}
+                  mapOffers={propertyes}
+                  activeCard = {activeCard}
+                  />
                 </section>
               </div>
             </div>

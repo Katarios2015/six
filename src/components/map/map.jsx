@@ -28,7 +28,7 @@ const getLocation = (array, city) => {
 
 
 const Map = (props) => {
-  const {mapOffers, cityName} = props;
+  const {mapOffers, activeCard, cityName} = props;
   const mapRef = useRef(null);
   const city = getLocation(mapOffers, cityName);
   const zoom = 12;
@@ -57,8 +57,9 @@ const Map = (props) => {
   }, [mapRef, mapOffers, cityName]);
   useEffect(() => {
     mapOffers.forEach((offer) => {
+      const activePin = activeCard ? activeCard.id === offer.id : false;
       const customIcon = leaflet.icon({
-        iconUrl: `/img/pin.svg`,
+        iconUrl: activePin ? `/img/pin-active.svg` : `/img/pin.svg`,
         iconSize: [27, 39]
       });
 
@@ -71,7 +72,7 @@ const Map = (props) => {
       })
       .addTo(mapRef.current);
     });
-  }, [mapRef, mapOffers, cityName]);
+  }, [mapRef, mapOffers, activeCard, cityName]);
   return (
     <div style={{height: `100%`}} id="map" ref={mapRef}/>
   );
@@ -84,6 +85,7 @@ const mapStateToProps = (state) => ({
 Map.propTypes = {
   mapOffers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
   cityName: PropTypes.string.isRequired,
+  activeCard: CARD_PROP_TYPES
 };
 export {Map};
 export default connect(mapStateToProps, null)(Map);

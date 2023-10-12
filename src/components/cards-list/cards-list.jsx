@@ -36,14 +36,7 @@ const getCardByNearbyFlag = (flag, offer, handleCardMouseOver, handleCardMouseOu
 
 
 const CardsList = (props) => {
-  const {offers, nearbyFlag, cityName, propertyes, sortType, addPropertyes, sortedPropertyes} = props;
-  const [, setActiveCard] = useState(null);
-  const handleCardMouseOver = (item) => {
-    setActiveCard(item);
-  };
-  const handleCardMouseOut = () => {
-    setActiveCard(null);
-  };
+  const {offers, nearbyFlag, cityName, propertyes, sortType, addPropertyes, sortedPropertyes, handleCardMouseOver, handleCardMouseOut} = props;
 
   if (sortType === `Popular`) {
     useEffect(() => {
@@ -81,6 +74,7 @@ const mapDispatchToProps = (dispatch) => ({
   addPropertyes(cityName, offers) {
     dispatch(ActionCreator.addPropertyes(cityName, offers));
   },
+
   sortedPropertyes(prev, propertyes, sortType) {
     dispatch(ActionCreator.sortedPropertyes(prev, propertyes, sortType));
   },
