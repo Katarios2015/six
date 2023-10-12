@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import "leaflet/dist/leaflet.css";
 import {CARD_PROP_TYPES} from "../../const/const";
 import {connect} from 'react-redux';
+
 let location;
 const getLocation = (array, city) => {
   if (array) {
@@ -23,7 +24,6 @@ const getLocation = (array, city) => {
     }
   }
   return [location.latitude, location.longitude];
-
 };
 
 

@@ -7,7 +7,7 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import App from "./components/app/app";
 import {offers, reviews} from "./mocks/offers";
 import {reducer} from "./store/reducer";
-import {cities} from "./const/const";
+import {cities, SORT_TYPES} from "./const/const";
 
 const store = createStore(
     reducer,
@@ -22,6 +22,7 @@ ReactDOM.render(
           offers = {offers}
           reviews = {reviews}
           cities = {cities}
+          sortList ={SORT_TYPES}
         />
       </Provider>
     </StrictMode>,

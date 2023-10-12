@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {ActionCreator} from "../../store/action";
 import {connect} from 'react-redux';
-// import {CARD_PROP_TYPES} from '../../const/const';
 
 const CitiesList = (props) => {
   const {cities, cityName, cityOnChange} = props;
@@ -40,8 +39,6 @@ CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   cityName: PropTypes.string.isRequired,
   cityOnChange: PropTypes.func.isRequired,
-  // addPropertyes: PropTypes.func.isRequired,
-  // propertyes: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired
 };
 
 export {CitiesList};
