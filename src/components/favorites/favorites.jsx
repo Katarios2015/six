@@ -1,11 +1,12 @@
 import React from "react";
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import FavoriteCardsList from '../favorite-cards-list/favorite-cards-list';
 import {CARD_PROP_TYPES} from '../../const/const';
 import {Link} from "react-router-dom";
 
 const Favorites = (props) => {
-  const {favoriteCards} = props;
+  const {offers} = props;
   return (
     <div className="page">
       <header className="header">
@@ -35,7 +36,7 @@ const Favorites = (props) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <FavoriteCardsList items={favoriteCards}/>
+              <FavoriteCardsList items={offers}/>
             </ul>
           </section>
         </div>
@@ -48,9 +49,13 @@ const Favorites = (props) => {
     </div>
   );
 };
+const mapStateToProps = (state) => ({
+  offers: state.offers
+});
 
 Favorites.propTypes = {
-  favoriteCards: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired
+  offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired
 };
 
-export default Favorites;
+export {Favorites};
+export default connect(mapStateToProps, null)(Favorites);

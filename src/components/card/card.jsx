@@ -57,8 +57,8 @@ const Card = (props) => {
 
 Card.propTypes = {
   item: CARD_PROP_TYPES.isRequired,
-  onMouseOver: PropTypes.func.isRequired,
-  onMouseOut: PropTypes.func.isRequired,
+  onMouseOver: PropTypes.func,
+  onMouseOut: PropTypes.func,
   nearbyFlagCard: PropTypes.bool.isRequired,
   className: PropTypes.string.isRequired,
   classNameWrapper: PropTypes.string.isRequired,

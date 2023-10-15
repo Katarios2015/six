@@ -96,8 +96,8 @@ const offers = [
     },
     maxAdults: 4,
     previewImage: `img/1.png`,
-    price: 80,
-    rating: 4.8,
+    price: 200,
+    rating: 5,
     title: `Beautiful & luxurious room at great location`,
     type: `room`
   },

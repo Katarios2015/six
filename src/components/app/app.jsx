@@ -6,27 +6,25 @@ import Favorities from "../favorites/favorites";
 import Login from "../login/login";
 import NotFound from "../not-found/not-found";
 import Property from "../property/property";
-import {CARD_PROP_TYPES, REVIEW_PROP_TYPES} from '../../const/const';
+import {REVIEW_PROP_TYPES} from '../../const/const';
 
 const App = (props) => {
-  const {offers, reviews, cities} = props;
+  const {reviews, cities, sortList} = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainPage offers={offers} cities={cities}/>
+          <MainPage cities={cities} sortList={sortList}/>
         </Route>
         <Route exact path="/login">
           <Login/>
         </Route>
         <Route exact path="/favorites">
-          <Favorities favoriteCards={offers}/>
+          <Favorities/>
         </Route>
         <Route exact path="/offer/:id">
           <Property
-            offers={offers}
             propertyReviews={reviews}
-            nearOffers={offers.slice(0, 3)}
             nearby={true}/>
         </Route>
         <Route>
@@ -38,10 +36,11 @@ const App = (props) => {
   );
 };
 
+
 App.propTypes = {
-  offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
   reviews: PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  sortList: PropTypes.arrayOf(PropTypes.string).isRequired,
   nearby: PropTypes.bool
 };
 

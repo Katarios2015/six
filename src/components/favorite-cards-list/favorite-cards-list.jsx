@@ -1,5 +1,4 @@
 import React from "react";
-
 import FavoriteCard from "../favorite-card/favorite-card";
 import PropTypes from 'prop-types';
 import {CARD_PROP_TYPES} from '../../const/const';
@@ -30,8 +29,10 @@ const FavoriteCardsList = (props) => {
   );
 };
 
+
 FavoriteCardsList.propTypes = {
   items: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired
 };
+
 
 export default FavoriteCardsList;
