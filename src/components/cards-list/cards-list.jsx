@@ -36,21 +36,11 @@ const getCardByNearbyFlag = (flag, offer, handleCardMouseOver, handleCardMouseOu
 
 
 const CardsList = (props) => {
-  const {offers, nearbyFlag, cityName, propertyes, sortType, addPropertyes, sortedPropertyes, handleCardMouseOver, handleCardMouseOut} = props;
-
-  if (sortType === `Popular`) {
-    useEffect(() => {
-      addPropertyes(cityName, offers);
-    }, [cityName]);
-  } else {
-    useEffect(()=> {
-      sortedPropertyes(propertyes, sortType);
-    }, [sortType]);
-  }
+  const {offers, nearbyFlag, cityName, propertyes, sortType, addPropertyes, handleCardMouseOver, handleCardMouseOut} = props;
 
   useEffect(() => {
-    addPropertyes(cityName, offers);
-  }, [cityName]);
+    addPropertyes(cityName, offers, sortType);
+  }, [cityName, sortType]);
 
   return (
     <div className={`places__list ${nearbyFlag === false ? `cities__places-list  tabs__content` : `near-places__list`}`}
@@ -68,15 +58,12 @@ const mapStateToProps = (state) => ({
   propertyes: state.propertyes,
   cityName: state.cityName,
   sortType: state.sortType,
+  offers: state.offers
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addPropertyes(cityName, offers) {
-    dispatch(ActionCreator.addPropertyes(cityName, offers));
-  },
-
-  sortedPropertyes(prev, propertyes, sortType) {
-    dispatch(ActionCreator.sortedPropertyes(prev, propertyes, sortType));
+  addPropertyes(cityName, offers, sortType) {
+    dispatch(ActionCreator.addPropertyes(cityName, offers, sortType));
   },
 });
 
@@ -86,8 +73,9 @@ CardsList.propTypes = {
   nearbyFlag: PropTypes.bool.isRequired,
   cityName: PropTypes.string.isRequired,
   addPropertyes: PropTypes.func.isRequired,
-  sortedPropertyes: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
+  handleCardMouseOver: PropTypes.func,
+  handleCardMouseOut: PropTypes.func,
 };
 
 export {CardsList};

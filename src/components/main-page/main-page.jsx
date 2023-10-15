@@ -74,9 +74,9 @@ const MainPage = (props) => {
               <div className="cities__right-section">
                 <section className="cities__map map">
                   <Map
-                  cityName={cityName}
-                  mapOffers={propertyes}
-                  activeCard = {activeCard}
+                    cityName={cityName}
+                    mapOffers={propertyes}
+                    activeCard = {activeCard}
                   />
                 </section>
               </div>
@@ -92,6 +92,7 @@ const mapStateToProps = (state) => ({
   propertyes: state.propertyes,
   cityName: state.cityName,
   sortType: state.sortType,
+  offers: state.offers
 });
 
 
@@ -106,15 +107,15 @@ MainPage.propTypes = {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  addPropertyes(propertyes) {
-    dispatch(ActionCreator.addPropertyes(propertyes));
-  },
   sort(sortType) {
     dispatch(ActionCreator.sort(sortType));
   },
-  sortedPropertyes(propertyes, sortType) {
+  addPropertyes(cityName, offers, sortType) {
+    dispatch(ActionCreator.addPropertyes(cityName, offers, sortType));
+  },
+  /*sortedPropertyes(propertyes, sortType) {
     dispatch(ActionCreator.sortedPropertyes(propertyes, sortType));
-  }
+  }*/
 });
 
 export {MainPage};

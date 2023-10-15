@@ -84,7 +84,7 @@ const mapStateToProps = (state) => ({
 
 Map.propTypes = {
   mapOffers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
-  cityName: PropTypes.string.isRequired,
+  cityName: PropTypes.string,
   activeCard: CARD_PROP_TYPES
 };
 export {Map};
