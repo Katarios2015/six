@@ -5,13 +5,20 @@ import {legacy_createStore as createStore} from 'redux';
 import {Provider} from "react-redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import App from "./components/app/app";
+import thunk from "redux-thunk";
+import {applyMiddleware} from "redux";
+import createAPI from "./services/api";
 import {reviews} from "./mocks/offers";
 import {reducer} from "./store/reducer";
 import {cities, SORT_TYPES} from "./const/const";
 
+const api = createAPI();
+
 const store = createStore(
     reducer,
-    composeWithDevTools()
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
 
 ReactDOM.render(

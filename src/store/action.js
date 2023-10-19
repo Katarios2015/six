@@ -3,6 +3,7 @@ const ActionType = {
   CITY_ON_CHANGE: `city/CITY_ON_CHANGE`,
   ADD_PROPERTYES: `property/ADD_PROPERTYES`,
   SORTING: `sort/SORTING`,
+  LOAD_OFFERS: `data/loadOffers`
 };
 
 
@@ -21,6 +22,13 @@ const ActionCreator = {
     type: ActionType.ADD_PROPERTYES,
     payload: getFiltredByCityOffers(cityName, offers, sortType)
   }),
+
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers,
+  }),
+
+
 };
 
 export {ActionType, ActionCreator};
