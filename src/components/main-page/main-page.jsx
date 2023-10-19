@@ -9,16 +9,35 @@ import {connect} from 'react-redux';
 import SortForm from '../sort/sort';
 import {ActionCreator} from "../../store/action";
 
+import Loading from "../loading/loading";
+import fetchOffersList from "../../store/action-api";
+import {useEffect} from 'react';
+
 const MainPage = (props) => {
-  const {offers, propertyes, cities, cityName, sortList, sortType} = props;
+
+  const {offers, propertyes, cities, cityName, sortList, sortType, isDataLoaded, onLoadData} = props;
   const placesCount = propertyes.length;
   const [activeCard, setActiveCard] = useState(null);
+
   const handleCardMouseOver = (item) => {
     setActiveCard(item);
   };
   const handleCardMouseOut = () => {
     setActiveCard(null);
   };
+
+  useEffect(() => {
+    if (!isDataLoaded) {
+      onLoadData();
+    }
+  }, [isDataLoaded]);
+
+  if (!isDataLoaded) {
+    return (
+      <Loading />
+    );
+  }
+
   return (
     <>
       <div style={{display: `none`}}>
@@ -92,7 +111,8 @@ const mapStateToProps = (state) => ({
   propertyes: state.propertyes,
   cityName: state.cityName,
   sortType: state.sortType,
-  offers: state.offers
+  offers: state.offers,
+  isDataLoaded: state.isDataLoaded,
 });
 
 
@@ -103,6 +123,8 @@ MainPage.propTypes = {
   sortList: PropTypes.arrayOf(PropTypes.string).isRequired,
   cityName: PropTypes.string.isRequired,
   sortType: PropTypes.string.isRequired,
+  isDataLoaded: PropTypes.bool.isRequired,
+  onLoadData: PropTypes.func.isRequired,
 };
 
 
@@ -113,9 +135,9 @@ const mapDispatchToProps = (dispatch) => ({
   addPropertyes(cityName, offers, sortType) {
     dispatch(ActionCreator.addPropertyes(cityName, offers, sortType));
   },
-  /*sortedPropertyes(propertyes, sortType) {
-    dispatch(ActionCreator.sortedPropertyes(propertyes, sortType));
-  }*/
+  onLoadData() {
+    dispatch((fetchOffersList()));
+  },
 });
 
 export {MainPage};
