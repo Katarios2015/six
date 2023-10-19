@@ -1,6 +1,5 @@
 import {DEFAULT_CITY} from "../const/const";
 import {ActionType} from "../store/action";
-//import {offers} from "../mocks/offers";
 
 
 const initialState = {
