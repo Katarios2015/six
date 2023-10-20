@@ -1,6 +1,5 @@
-import {DEFAULT_CITY} from "../const/const";
+import {DEFAULT_CITY, AuthorizationStatus} from "../const/const";
 import {ActionType} from "../store/action";
-//import {offers} from "../mocks/offers";
 
 
 const initialState = {
@@ -9,6 +8,7 @@ const initialState = {
   sortType: `Popular`,
   offers: [],
   isDataLoaded: false,
+  authorizationStatus: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,6 +37,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         offers: action.payload,
         isDataLoaded: true,
+      };
+    }
+    case ActionType.REQUIRED_AUTHORIZATION: {
+      return {
+        ...state,
+        authorizationStatus: action.payload,
       };
     }
     default: {

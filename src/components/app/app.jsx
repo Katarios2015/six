@@ -7,6 +7,8 @@ import Login from "../login/login";
 import NotFound from "../not-found/not-found";
 import Property from "../property/property";
 import {REVIEW_PROP_TYPES} from '../../const/const';
+import PrivateRoute from "../private-route/private-route";
+
 
 const App = (props) => {
   const {reviews, cities, sortList} = props;
@@ -19,9 +21,11 @@ const App = (props) => {
         <Route exact path="/login">
           <Login/>
         </Route>
-        <Route exact path="/favorites">
-          <Favorities/>
-        </Route>
+        <PrivateRoute exact
+          path="/favorites"
+          render={() => <Favorities />}
+        >
+        </PrivateRoute>
         <Route exact path="/offer/:id">
           <Property
             propertyReviews={reviews}

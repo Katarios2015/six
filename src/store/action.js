@@ -3,7 +3,8 @@ const ActionType = {
   CITY_ON_CHANGE: `city/CITY_ON_CHANGE`,
   ADD_PROPERTYES: `property/ADD_PROPERTYES`,
   SORTING: `sort/SORTING`,
-  LOAD_OFFERS: `data/loadOffers`
+  LOAD_OFFERS: `data/loadOffers`,
+  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
 };
 
 
@@ -28,7 +29,10 @@ const ActionCreator = {
     payload: offers,
   }),
 
-
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  })
 };
 
 export {ActionType, ActionCreator};

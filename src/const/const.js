@@ -56,7 +56,13 @@ const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseld
 const SORT_TYPES = [
   `Popular`, `Price: low to high`,
   `Price: high to low`,
-  `Top rated first`];
+  `Top rated first`
+];
+
+const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
 
 
-export {CARD_PROP_TYPES, REVIEW_PROP_TYPES, DEFAULT_CITY, cities, SORT_TYPES};
+export {CARD_PROP_TYPES, REVIEW_PROP_TYPES, DEFAULT_CITY, cities, SORT_TYPES, AuthorizationStatus};
