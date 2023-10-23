@@ -13,9 +13,11 @@ import Loading from "../loading/loading";
 import {fetchOffersList, checkAuth} from "../../store/action-api";
 import {useEffect} from 'react';
 
+import {login} from "../../store/action-api";
+
 const MainPage = (props) => {
 
-  const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, onLoadData, isAuth} = props;
+  const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, avatarUrl, onLoadData, isAuth} = props;
   const placesCount = propertyes.length;
   const [activeCard, setActiveCard] = useState(null);
 
@@ -29,6 +31,7 @@ const MainPage = (props) => {
   useEffect(() => {
     isAuth();
   }, []);
+
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -64,7 +67,7 @@ const MainPage = (props) => {
                       <Link to="/favorites" className="header__nav-link header__nav-link--profile" >
                         <div className="header__avatar-wrapper user__avatar-wrapper">
                         </div>
-                        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                        <span className="header__user-name user__name">{email}</span>
                       </Link>
                     </li> :
                     <li className="header__nav-item user">
@@ -126,6 +129,8 @@ const mapStateToProps = (state) => ({
   offers: state.offers,
   isDataLoaded: state.isDataLoaded,
   authorizationStatus: state.authorizationStatus,
+  email: state.email,
+  avatarUrl: state.avatarUrl,
 });
 
 
@@ -140,6 +145,8 @@ MainPage.propTypes = {
   onLoadData: PropTypes.func.isRequired,
   isAuth: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
+  email: PropTypes.string,
+  avatarUrl: PropTypes.string,
 };
 
 

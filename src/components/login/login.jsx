@@ -1,15 +1,11 @@
 import React, {useRef} from 'react';
-// import {useHistory} from 'react-router-dom';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../store/action-api";
 
-
 const Login = ({onSubmit}) => {
-  const loginRef = useRef();
-  const passwordRef = useRef();
-
-  // const history = useHistory();
+  const loginRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -69,7 +65,8 @@ const Login = ({onSubmit}) => {
               </div>
               <button
                 className="login__submit form__submit button"
-                type="submit">Sign in
+                type="submit">
+                  Sign in
               </button>
             </form>
           </section>
@@ -93,7 +90,7 @@ Login.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
     dispatch(login(authData));
-  }
+  },
 });
 
 export {Login};

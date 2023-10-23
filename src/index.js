@@ -13,6 +13,7 @@ import {reducer} from "./store/reducer";
 import {cities, SORT_TYPES} from "./const/const";
 import {ActionCreator} from "./store/action";
 import {checkAuth} from "./store/action-api";
+import {redirect} from "./store/middlewares/redirect";
 
 const api = createAPI(
     () => store.dispatch(ActionCreator.requireAuthorization(false))
@@ -24,11 +25,12 @@ const store = createStore(
         // Начнём с конфигурирования хранилища. Подключим `redux-thunk` в список
     // middlewares. Аргументом для `thunk` передадим сконфигурированный
     // экземпляр `axios`, чтобы была возможность обратиться к нему из действия
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
 
-store.dispatch(checkAuth());
+store.dispatch(checkAuth());// необходимо на случай если позьватель неавторизован, но заходит на страницу куда можно только авторизованным пользователям, те проеверяем статус авторизации.
 
 ReactDOM.render(
     <StrictMode>

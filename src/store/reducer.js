@@ -9,6 +9,9 @@ const initialState = {
   offers: [],
   isDataLoaded: false,
   authorizationStatus: false,
+  email: ``,
+  avatarUrl: ``,
+  isPro: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,6 +46,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+    }
+    case ActionType.AUTHORIZATION_DATA: {
+      return {
+        ...state,
+        email: action.payload.email,
+        avatarUrl: action.payload.avatarUrl,
+        isPro: action.payload.isPro,
       };
     }
     default: {
