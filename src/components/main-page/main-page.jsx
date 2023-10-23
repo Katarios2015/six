@@ -10,12 +10,13 @@ import SortForm from '../sort/sort';
 import {ActionCreator} from "../../store/action";
 
 import Loading from "../loading/loading";
-import fetchOffersList from "../../store/action-api";
+import {fetchOffersList, checkAuth} from "../../store/action-api";
 import {useEffect} from 'react';
+
 
 const MainPage = (props) => {
 
-  const {offers, propertyes, cities, cityName, sortList, sortType, isDataLoaded, onLoadData} = props;
+  const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, onLoadData, isAuth} = props;
   const placesCount = propertyes.length;
   const [activeCard, setActiveCard] = useState(null);
 
@@ -25,6 +26,11 @@ const MainPage = (props) => {
   const handleCardMouseOut = () => {
     setActiveCard(null);
   };
+
+  useEffect(() => {
+    isAuth();
+  }, []);
+
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -37,6 +43,7 @@ const MainPage = (props) => {
       <Loading />
     );
   }
+
 
   return (
     <>
@@ -54,14 +61,21 @@ const MainPage = (props) => {
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <Link to="/favorites" className="header__nav-link header__nav-link--profile" >
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </Link>
-                  </li>
+                  {authorizationStatus ?
+                    <li className="header__nav-item user">
+                      <Link to="/favorites" className="header__nav-link header__nav-link--profile" >
+                        <div className="header__avatar-wrapper user__avatar-wrapper">
+                        </div>
+                        <span className="header__user-name user__name">{email}</span>
+                      </Link>
+                    </li> :
+                    <li className="header__nav-item user">
+                      <Link to="/login" className="header__nav-link header__nav-link--profile" href="#">
+                        <div className="header__avatar-wrapper user__avatar-wrapper">
+                        </div>
+                        <span className="header__login">Sign in</span>
+                      </Link>
+                    </li>}
                 </ul>
               </nav>
             </div>
@@ -113,6 +127,9 @@ const mapStateToProps = (state) => ({
   sortType: state.sortType,
   offers: state.offers,
   isDataLoaded: state.isDataLoaded,
+  authorizationStatus: state.authorizationStatus,
+  email: state.email,
+  avatarUrl: state.avatarUrl,
 });
 
 
@@ -125,6 +142,10 @@ MainPage.propTypes = {
   sortType: PropTypes.string.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired,
+  isAuth: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.bool.isRequired,
+  email: PropTypes.string,
+  avatarUrl: PropTypes.string,
 };
 
 
@@ -137,6 +158,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onLoadData() {
     dispatch((fetchOffersList()));
+  },
+  isAuth() {
+    dispatch((checkAuth()));
   },
 });
 

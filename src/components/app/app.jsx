@@ -1,17 +1,31 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import Favorities from "../favorites/favorites";
 import Login from "../login/login";
 import NotFound from "../not-found/not-found";
 import Property from "../property/property";
 import {REVIEW_PROP_TYPES} from '../../const/const';
+import PrivateRoute from "../private-route/private-route";
+import browserHistory from "../../browser-history";
+/* Компонент `BrowserRouter` автоматически создаёт объект для работы с
+историей. В прошлом шаге мы решили сделать это самостоятельно.
+
+Раз так, то нам необходимо чтобы `Router` пользовался нашим экземпляром
+объекта `history`, а не собственным.
+
+К сожалению, компонент `BrowserRouter` не позволяет этого сделать,
+но в пакете `react-router-dom` есть другой компонент – `Router`.
+Основное его отличие от `BrowserRouter` — конфигурируемость.
+
+Например, чтобы воспользоваться нашим экземпляром `history`, достаточно
+передать его в соответствующий пров, в `history`. */
 
 const App = (props) => {
   const {reviews, cities, sortList} = props;
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/">
           <MainPage cities={cities} sortList={sortList}/>
@@ -19,9 +33,11 @@ const App = (props) => {
         <Route exact path="/login">
           <Login/>
         </Route>
-        <Route exact path="/favorites">
-          <Favorities/>
-        </Route>
+        <PrivateRoute exact
+          path="/favorites"
+          render={() => <Favorities />}
+        >
+        </PrivateRoute>
         <Route exact path="/offer/:id">
           <Property
             propertyReviews={reviews}

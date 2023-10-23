@@ -6,8 +6,6 @@ import {CARD_PROP_TYPES} from '../../const/const';
 import {ActionCreator} from "../../store/action";
 import {connect} from 'react-redux';
 import {useEffect} from 'react';
-// import Loading from "../loading/loading";
-// import fetchOffersList from "../../store/action-api";
 
 const getCardByNearbyFlag = (flag, offer, handleCardMouseOver, handleCardMouseOut) => {
 
@@ -61,7 +59,6 @@ const mapStateToProps = (state) => ({
   cityName: state.cityName,
   sortType: state.sortType,
   offers: state.offers,
-  // isDataLoaded: state.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -79,8 +76,6 @@ CardsList.propTypes = {
   sortType: PropTypes.string.isRequired,
   handleCardMouseOver: PropTypes.func,
   handleCardMouseOut: PropTypes.func,
-  // isDataLoaded: PropTypes.bool.isRequired,
-  // onLoadData: PropTypes.func.isRequired,
 };
 
 export {CardsList};
