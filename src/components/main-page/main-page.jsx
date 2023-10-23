@@ -13,11 +13,10 @@ import Loading from "../loading/loading";
 import {fetchOffersList, checkAuth} from "../../store/action-api";
 import {useEffect} from 'react';
 
-import {login} from "../../store/action-api";
 
 const MainPage = (props) => {
 
-  const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, avatarUrl, onLoadData, isAuth} = props;
+  const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, onLoadData, isAuth} = props;
   const placesCount = propertyes.length;
   const [activeCard, setActiveCard] = useState(null);
 

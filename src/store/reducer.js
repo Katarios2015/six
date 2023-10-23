@@ -1,4 +1,4 @@
-import {DEFAULT_CITY, AuthorizationStatus} from "../const/const";
+import {DEFAULT_CITY} from "../const/const";
 import {ActionType} from "../store/action";
 
 
