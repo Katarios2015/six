@@ -1,10 +1,21 @@
 import {ActionCreator} from "./action";
 // import {AuthorizationStatus} from "../const/const";
+import {adaptToClient} from "./middlewares/adapter";
 
 const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)
-    .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
+    .then(({data}) => dispatch(ActionCreator.loadOffers(data.map(adaptToClient))))
 );
+
+const fetchOffer = () => (dispatch, getState, api) => (
+  api.get(`/hotels/3`)
+    .then(({data}) => {
+      dispatch(ActionCreator.loadOffer(adaptToClient(data)));
+      console.log(getState());
+    })
+    .catch(() => dispatch(ActionCreator.redirectToRoute(`/offer/`)))
+);
+//${getState().id}
 
 const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
@@ -32,5 +43,5 @@ const login = ({login: email, password}) => (dispatch, _getState, api) => (
     .then(() => dispatch(ActionCreator.redirectToRoute(`/`)))
 );
 
-export {fetchOffersList, checkAuth, login};
+export {fetchOffersList, fetchOffer, checkAuth, login};
 

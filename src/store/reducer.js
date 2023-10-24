@@ -7,11 +7,13 @@ const initialState = {
   propertyes: [],
   sortType: `Popular`,
   offers: [],
+  offer: {},
   isDataLoaded: false,
   authorizationStatus: false,
   email: ``,
   avatarUrl: ``,
   isPro: false,
+  id: ``,
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +23,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cityName: action.payload,
+      };
+    }
+    case ActionType.GET_OFFER_ID: {
+      return {
+        ...state,
+        id: action.payload,
       };
     }
     case ActionType.ADD_PROPERTYES: {
@@ -39,6 +47,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
+        isDataLoaded: true,
+      };
+    }
+    case ActionType.LOAD_OFFER: {
+      return {
+        ...state,
+        offer: action.payload,
         isDataLoaded: true,
       };
     }

@@ -19,7 +19,6 @@ const MainPage = (props) => {
   const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, onLoadData, isAuth} = props;
   const placesCount = propertyes.length;
   const [activeCard, setActiveCard] = useState(null);
-
   const handleCardMouseOver = (item) => {
     setActiveCard(item);
   };
