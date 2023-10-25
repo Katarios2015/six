@@ -121,10 +121,10 @@ const MainPage = (props) => {
 };
 
 const mapStateToProps = (state) => ({
+  offers: state.offers,
   propertyes: state.propertyes,
   cityName: state.cityName,
   sortType: state.sortType,
-  offers: state.offers,
   isDataLoaded: state.isDataLoaded,
   authorizationStatus: state.authorizationStatus,
   email: state.email,

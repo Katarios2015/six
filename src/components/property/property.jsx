@@ -1,36 +1,42 @@
 import React from "react";
 import {useEffect} from 'react';
-
 import {connect} from 'react-redux';
-import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
-import {CARD_PROP_TYPES, REVIEW_PROP_TYPES} from "../../const/const";
+import {Link, useParams} from "react-router-dom";
+import PropTypes, { string } from "prop-types";
+import {CARD_PROP_TYPES, REVIEW_PROP_TYPES, ONE_RATE_STAR_PERCENT} from "../../const/const";
 import ReviewForm from "../review-form/review-form";
 import ReviewesList from "../reviewes-list/reviewes-list";
 import {Map} from '../map/map';
 import CardsList from '../cards-list/cards-list';
-import {fetchOffer, checkAuth} from "../../store/action-api";
+import {fetchOffer, fetchComments, checkAuth} from "../../store/action-api";
 import Loading from "../loading/loading";
 import {ActionCreator} from "../../store/action";
-const ONE_RATE_STAR_PERCENT = 20;
 
 const Property = (props) => {
-  const {offer, authorizationStatus, isDataLoaded, email, onLoadData, isAuth, propertyReviews} = props;
+  const {offer, comments, authorizationStatus, isDataLoaded, isCommentsLoaded, email, onLoadData, onLoadComments, isAuth, getOfferId, comment} = props;
+
   const {bedrooms, description, goods, host, images, isPremium, maxAdults, price, rating, title, type} = offer;
 
   const rateWidth = Number(rating * ONE_RATE_STAR_PERCENT);
-  console.log(rateWidth);
+  const urlParams = useParams();
+
+  const urlId = urlParams.id;
 
   useEffect(() => {
     isAuth();
+    getOfferId(urlId);
   }, []);
-
 
   useEffect(() => {
     if (!isDataLoaded) {
       onLoadData();
     }
   }, [isDataLoaded]);
+
+  useEffect(() => {
+    onLoadComments();
+  }, [isCommentsLoaded, comment]);
+
 
   if (!isDataLoaded) {
     return (
@@ -156,8 +162,8 @@ const Property = (props) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewesList reviews={propertyReviews}/>
-                <ReviewForm/>
+                <ReviewesList reviews={comments}/>
+                {authorizationStatus ? <ReviewForm/> : ``}
               </section>
             </div>
           </div>
@@ -178,35 +184,46 @@ const Property = (props) => {
 
 const mapStateToProps = (state) => ({
   offer: state.offer,
-  // id: state.id,
   isDataLoaded: state.isDataLoaded,
+  isCommentsLoaded: state.isCommentsLoaded,
   authorizationStatus: state.authorizationStatus,
   email: state.email,
+  comments: state.comments,
+  comment: state.comment
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadData() {
     dispatch((fetchOffer()));
   },
+  onLoadComments() {
+    dispatch((fetchComments()));
+  },
   isAuth() {
     dispatch((checkAuth()));
   },
-  getOfferIdOnClick(id) {
-    dispatch(ActionCreator.getOfferIdOnClick(id));
+  getOfferId(urlId) {
+    dispatch(ActionCreator.getOfferId(urlId));
+  },
+  addComment(comment) {
+    dispatch(ActionCreator.addComment(comment));
   }
 });
 
 Property.propTypes = {
-  propertyReviews: PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired,
+  comments: PropTypes.arrayOf(REVIEW_PROP_TYPES),
   // offers: PropTypes.arrayOf(CARD_PROP_TYPES),
   offer: CARD_PROP_TYPES.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
+  isCommentsLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired,
+  onLoadComments: PropTypes.func.isRequired,
   isAuth: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
   email: PropTypes.string,
-  // id: PropTypes.number,
-  getOfferIdOnClick: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
+  getOfferId: PropTypes.func.isRequired,
+  comment: PropTypes.objectOf(string),
 
 };
 

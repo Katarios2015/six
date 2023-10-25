@@ -40,7 +40,6 @@ const App = (props) => {
         </PrivateRoute>
         <Route exact path="/offer/:id">
           <Property
-            propertyReviews={reviews}
             nearby={true}/>
         </Route>
         <Route>
@@ -54,7 +53,6 @@ const App = (props) => {
 
 
 App.propTypes = {
-  reviews: PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   sortList: PropTypes.arrayOf(PropTypes.string).isRequired,
   nearby: PropTypes.bool

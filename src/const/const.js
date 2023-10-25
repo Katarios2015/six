@@ -50,6 +50,7 @@ const REVIEW_PROP_TYPES = PropTypes.shape({
 });
 
 const DEFAULT_CITY = `Paris`;
+const ONE_RATE_STAR_PERCENT = 20;
 
 const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
@@ -65,4 +66,4 @@ const AuthorizationStatus = {
 };
 
 
-export {CARD_PROP_TYPES, REVIEW_PROP_TYPES, DEFAULT_CITY, cities, SORT_TYPES, AuthorizationStatus};
+export {CARD_PROP_TYPES, REVIEW_PROP_TYPES, DEFAULT_CITY, cities, SORT_TYPES, ONE_RATE_STAR_PERCENT, AuthorizationStatus};

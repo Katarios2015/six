@@ -17,7 +17,7 @@ const adaptToClient = (offer)=> {
   );
 
   // Ненужные ключи мы удаляем
-  //delete adaptedOffer.host;
+  // delete adaptedOffer.host;
   delete adaptedOffer.is_favorite;
   delete adaptedOffer.is_premium;
   delete adaptedOffer.max_adults;
@@ -44,7 +44,7 @@ const adaptToServer = (offer)=> {
   delete adaptedOffer.host.avatarUrl;
   delete adaptedOffer.host.isPro;
   delete adaptedOffer.isFavorite;
-  delete adaptedOffer.is_premium;
+  delete adaptedOffer.isPremium;
   delete adaptedOffer.maxAdults;
   delete adaptedOffer.previewImage;
 
@@ -52,4 +52,22 @@ const adaptToServer = (offer)=> {
   return adaptedOffer;
 };
 
-export {adaptToClient, adaptToServer};
+const adaptToClientReview = (review)=> {
+  const adaptedReview = Object.assign(
+      {},
+      review,
+      {
+        user: {
+          avatarUrl: review.user.avatar_url,
+          isPro: review.user.is_pro,
+          name: review.user.name,
+        },
+      },
+  );
+  delete adaptedReview.user.avatar_url;
+  delete adaptedReview.user.is_pro;
+
+  return adaptedReview;
+};
+
+export {adaptToClient, adaptToServer, adaptToClientReview};

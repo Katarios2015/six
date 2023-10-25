@@ -1,21 +1,29 @@
 import {ActionCreator} from "./action";
 // import {AuthorizationStatus} from "../const/const";
-import {adaptToClient} from "./middlewares/adapter";
+import {adaptToClient, adaptToClientReview} from "./middlewares/adapter";
 
 const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)
     .then(({data}) => dispatch(ActionCreator.loadOffers(data.map(adaptToClient))))
 );
 
+
 const fetchOffer = () => (dispatch, getState, api) => (
-  api.get(`/hotels/3`)
+  api.get(`/hotels/${getState().urlId}`)
     .then(({data}) => {
       dispatch(ActionCreator.loadOffer(adaptToClient(data)));
-      console.log(getState());
     })
     .catch(() => dispatch(ActionCreator.redirectToRoute(`/offer/`)))
 );
-//${getState().id}
+
+const fetchComments = () => (dispatch, getState, api) => (
+  api.get(`/comments/${getState().urlId}`)
+    .then(({data}) => {
+      dispatch(ActionCreator.loadComments(data.map(adaptToClientReview)));
+    })
+    .catch(() => console.log(`/comments/${getState().urlId}`))
+);
+
 
 const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
@@ -43,5 +51,13 @@ const login = ({login: email, password}) => (dispatch, _getState, api) => (
     .then(() => dispatch(ActionCreator.redirectToRoute(`/`)))
 );
 
-export {fetchOffersList, fetchOffer, checkAuth, login};
+const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => (
+  api.post(`/comments/${getState().urlId}`, {comment, rating})
+    .then(({data}) => {
+      dispatch(ActionCreator.addComment(data));
+    })
+    .catch((error) => console.log(`Ошибка ` + error))
+);
+
+export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments};
 

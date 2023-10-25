@@ -27,9 +27,6 @@ const Card = (props) => {
       <div className={`place-card__image-wrapper ${classNameWrapper}`}>
         <Link
           to={`${nearbyFlagCard === false ? `offer/${id}` : `${id}`}`} target="_blank"
-          onClick={()=> {
-            getOfferIdOnClick(id);
-          }}
         >
           <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
         </Link>
@@ -56,9 +53,6 @@ const Card = (props) => {
         <h2 className="place-card__name">
           <Link
             to={`${nearbyFlagCard === false ? `offer/${id}` : `${id}`}`} target="_blank"
-            onClick={()=> {
-              getOfferIdOnClick(id);
-            }}
           >
             {title}
           </Link>

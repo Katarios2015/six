@@ -36,7 +36,6 @@ ReactDOM.render(
     <StrictMode>
       <Provider store = {store}>
         <App
-          reviews = {reviews}
           cities = {cities}
           sortList ={SORT_TYPES}
         />
