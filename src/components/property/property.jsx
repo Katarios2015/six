@@ -2,12 +2,12 @@ import React from "react";
 import {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link, useParams} from "react-router-dom";
-import PropTypes, { string } from "prop-types";
+import PropTypes from "prop-types";
 import {CARD_PROP_TYPES, REVIEW_PROP_TYPES, ONE_RATE_STAR_PERCENT} from "../../const/const";
 import ReviewForm from "../review-form/review-form";
 import ReviewesList from "../reviewes-list/reviewes-list";
-import {Map} from '../map/map';
-import CardsList from '../cards-list/cards-list';
+// import {Map} from '../map/map';
+// import CardsList from '../cards-list/cards-list';
 import {fetchOffer, fetchComments, checkAuth} from "../../store/action-api";
 import Loading from "../loading/loading";
 import {ActionCreator} from "../../store/action";
@@ -223,7 +223,7 @@ Property.propTypes = {
   email: PropTypes.string,
   addComment: PropTypes.func.isRequired,
   getOfferId: PropTypes.func.isRequired,
-  comment: PropTypes.objectOf(string),
+  comment: PropTypes.obj,
 
 };
 

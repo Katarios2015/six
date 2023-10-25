@@ -8,7 +8,7 @@ import App from "./components/app/app";
 import thunk from "redux-thunk";
 import {applyMiddleware} from "redux";
 import createAPI from "./services/api";
-import {reviews} from "./mocks/offers";
+// import {reviews} from "./mocks/offers";
 import {reducer} from "./store/reducer";
 import {cities, SORT_TYPES} from "./const/const";
 import {ActionCreator} from "./store/action";

@@ -87,7 +87,7 @@ ReviewForm.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(commentData) {
-    console.log(commentData);
+    // console.log(commentData);
     dispatch(reviewPost(commentData));
   },
 });

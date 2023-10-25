@@ -6,7 +6,7 @@ import {ActionCreator} from "../../store/action";
 import {connect} from 'react-redux';
 
 const Card = (props) => {
-  const {item, onMouseOver, onMouseOut, className, classNameWrapper, nearbyFlagCard, getOfferIdOnClick} = props;
+  const {item, onMouseOver, onMouseOut, className, classNameWrapper, nearbyFlagCard} = props;
   const {id, isPremium, isFavorite, price, previewImage, title, type} = item;
 
   const handleCardMouseOver = () => {

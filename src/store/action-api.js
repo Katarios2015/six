@@ -21,7 +21,7 @@ const fetchComments = () => (dispatch, getState, api) => (
     .then(({data}) => {
       dispatch(ActionCreator.loadComments(data.map(adaptToClientReview)));
     })
-    .catch(() => console.log(`/comments/${getState().urlId}`))
+    .catch(() => {})
 );
 
 
@@ -56,7 +56,7 @@ const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => 
     .then(({data}) => {
       dispatch(ActionCreator.addComment(data));
     })
-    .catch((error) => console.log(`Ошибка ` + error))
+    .catch((error) => error)
 );
 
 export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments};
