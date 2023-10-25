@@ -1,16 +1,17 @@
 import React from "react";
-import {REVIEW_PROP_TYPES} from "../../const/const";
+import {REVIEW_PROP_TYPES, ONE_RATE_STAR_PERCENT} from "../../const/const";
+
 
 const Review = (props) => {
   const {reviewItem} = props;
-  const {comment, date, user} = reviewItem;
-
+  const {comment, date, user, rating} = reviewItem;
+  const rateWidth = Number(rating * ONE_RATE_STAR_PERCENT);
   return (
 
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width={54} height={54} alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={user.avatarUrl} width={54} height={54} alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
           {user.name}
@@ -19,7 +20,7 @@ const Review = (props) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `80%`}} />
+            <span style={{width: `${rateWidth}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

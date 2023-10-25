@@ -2,10 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import {CARD_PROP_TYPES} from "../../const/const";
 import {Link} from "react-router-dom";
+import {ActionCreator} from "../../store/action";
+import {connect} from 'react-redux';
 
 const Card = (props) => {
   const {item, onMouseOver, onMouseOut, className, classNameWrapper, nearbyFlagCard} = props;
-  const {id, isPremium, isFavorite, price, images, title, type} = item;
+  const {id, isPremium, isFavorite, price, previewImage, title, type} = item;
 
   const handleCardMouseOver = () => {
     onMouseOver(item);
@@ -23,8 +25,10 @@ const Card = (props) => {
         <span>{isPremium ? `Premium` : ``}</span>
       </div>
       <div className={`place-card__image-wrapper ${classNameWrapper}`}>
-        <Link to={`${nearbyFlagCard === false ? `offer/${id}` : `${id}`}`} target="_blank">
-          <img className="place-card__image" src={images[0]} width={260} height={200} alt="Place image" />
+        <Link
+          to={`${nearbyFlagCard === false ? `offer/${id}` : `${id}`}`} target="_blank"
+        >
+          <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
         </Link>
       </div>
       <div className="place-card__info">
@@ -47,7 +51,11 @@ const Card = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${nearbyFlagCard === false ? `offer/${id}` : `${id}`}`} target="_blank">{title}</Link>
+          <Link
+            to={`${nearbyFlagCard === false ? `offer/${id}` : `${id}`}`} target="_blank"
+          >
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -62,8 +70,17 @@ Card.propTypes = {
   nearbyFlagCard: PropTypes.bool.isRequired,
   className: PropTypes.string.isRequired,
   classNameWrapper: PropTypes.string.isRequired,
+  getOfferIdOnClick: PropTypes.func.isRequired,
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  getOfferIdOnClick(id) {
+    dispatch(ActionCreator.getOfferIdOnClick(id));
+  },
+});
 
-export default Card;
 
+export {Card};
+
+
+export default connect(null, mapDispatchToProps)(Card);

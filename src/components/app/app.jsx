@@ -6,7 +6,7 @@ import Favorities from "../favorites/favorites";
 import Login from "../login/login";
 import NotFound from "../not-found/not-found";
 import Property from "../property/property";
-import {REVIEW_PROP_TYPES} from '../../const/const';
+// import {REVIEW_PROP_TYPES} from '../../const/const';
 import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
 /* Компонент `BrowserRouter` автоматически создаёт объект для работы с
@@ -23,7 +23,7 @@ import browserHistory from "../../browser-history";
 передать его в соответствующий пров, в `history`. */
 
 const App = (props) => {
-  const {reviews, cities, sortList} = props;
+  const {cities, sortList} = props;
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
@@ -40,7 +40,6 @@ const App = (props) => {
         </PrivateRoute>
         <Route exact path="/offer/:id">
           <Property
-            propertyReviews={reviews}
             nearby={true}/>
         </Route>
         <Route>
@@ -54,7 +53,6 @@ const App = (props) => {
 
 
 App.propTypes = {
-  reviews: PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   sortList: PropTypes.arrayOf(PropTypes.string).isRequired,
   nearby: PropTypes.bool

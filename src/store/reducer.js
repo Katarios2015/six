@@ -7,11 +7,16 @@ const initialState = {
   propertyes: [],
   sortType: `Popular`,
   offers: [],
+  comments: [],
+  offer: {},
+  comment: {},
   isDataLoaded: false,
+  isCommentsLoaded: false,
   authorizationStatus: false,
   email: ``,
   avatarUrl: ``,
   isPro: false,
+  urlId: ``,
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +26,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cityName: action.payload,
+      };
+    }
+    case ActionType.GET_OFFER_ID: {
+      return {
+        ...state,
+        urlId: action.payload,
       };
     }
     case ActionType.ADD_PROPERTYES: {
@@ -42,6 +53,20 @@ const reducer = (state = initialState, action) => {
         isDataLoaded: true,
       };
     }
+    case ActionType.LOAD_OFFER: {
+      return {
+        ...state,
+        offer: action.payload,
+        isDataLoaded: true,
+      };
+    }
+    case ActionType.LOAD_COMMENTS: {
+      return {
+        ...state,
+        comments: action.payload,
+        isCommentsLoaded: true,
+      };
+    }
     case ActionType.REQUIRED_AUTHORIZATION: {
       return {
         ...state,
@@ -53,6 +78,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         email: action.payload.email,
         avatarUrl: action.payload.avatarUrl,
+        isPro: action.payload.isPro,
+      };
+    }
+    case ActionType.ADD_COMMENT: {
+      return {
+        ...state,
+        comment: action.payload,
+        name: action.payload.name,
+        avatarUrl: action.payload.user.avatarUrl,
         isPro: action.payload.isPro,
       };
     }

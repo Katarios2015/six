@@ -1,21 +1,46 @@
 import React, {useState} from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
+import {reviewPost} from "../../store/action-api";
 
 const MAX_RATING = 5;
 const stars = new Array(MAX_RATING).fill();
 
-const ReviewForm = () => {
+const ReviewForm = ({onSubmit}) => {
   const [countStars, setCountStars] = useState(0);
   const [review, setReview] = useState(``);
 
   const handleReviewChange = (evt)=> {
     setReview(evt.target.value);
+    if (review === `` && countStars) {
+      submitBtn.disabled = true;
+    } else if (review && countStars) {
+      submitBtn.disabled = false;
+    }
+
   };
   const handleStarsChange = (evt)=> {
     setCountStars(evt.target.value);
   };
 
+  const submitBtn = document.querySelector(`.reviews__submit`);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    onSubmit({
+      comment: review,
+      rating: countStars
+    },
+    setCountStars(null),
+    setReview(``),
+    );
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      onSubmit={handleSubmit}
+      className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {stars.map((star, i) => {
@@ -56,4 +81,16 @@ const ReviewForm = () => {
   );
 };
 
-export default ReviewForm;
+ReviewForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(commentData) {
+    // console.log(commentData);
+    dispatch(reviewPost(commentData));
+  },
+});
+
+export {ReviewForm};
+export default connect(null, mapDispatchToProps)(ReviewForm);

@@ -19,7 +19,6 @@ const MainPage = (props) => {
   const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, onLoadData, isAuth} = props;
   const placesCount = propertyes.length;
   const [activeCard, setActiveCard] = useState(null);
-
   const handleCardMouseOver = (item) => {
     setActiveCard(item);
   };
@@ -122,10 +121,10 @@ const MainPage = (props) => {
 };
 
 const mapStateToProps = (state) => ({
+  offers: state.offers,
   propertyes: state.propertyes,
   cityName: state.cityName,
   sortType: state.sortType,
-  offers: state.offers,
   isDataLoaded: state.isDataLoaded,
   authorizationStatus: state.authorizationStatus,
   email: state.email,
