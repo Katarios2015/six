@@ -2,6 +2,7 @@ import {ActionCreator} from "./action";
 // import {AuthorizationStatus} from "../const/const";
 import {adaptToClient, adaptToClientReview} from "./middlewares/adapter";
 
+
 const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)
     .then(({data}) => dispatch(ActionCreator.loadOffers(data.map(adaptToClient))))

@@ -11,6 +11,7 @@ const initialState = {
   offer: {},
   comment: {},
   isDataLoaded: false,
+  isOfferDataLoaded: false,
   isCommentsLoaded: false,
   authorizationStatus: false,
   email: ``,
@@ -57,7 +58,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offer: action.payload,
-        isDataLoaded: true,
+        isOfferDataLoaded: true,
       };
     }
     case ActionType.LOAD_COMMENTS: {

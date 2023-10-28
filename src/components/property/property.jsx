@@ -13,11 +13,11 @@ import Loading from "../loading/loading";
 import {ActionCreator} from "../../store/action";
 
 const Property = (props) => {
-  const {offer, comments, authorizationStatus, isDataLoaded, isCommentsLoaded, email, onLoadData, onLoadComments, isAuth, getOfferId, comment} = props;
+  const {offer, comments, authorizationStatus, isOfferDataLoaded, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, getOfferId, comment} = props;
 
   const {bedrooms, description, goods, host, images, isPremium, maxAdults, price, rating, title, type} = offer;
 
-  const rateWidth = Number(rating * ONE_RATE_STAR_PERCENT);
+  const rateWidth = Number(Math.round(rating) * ONE_RATE_STAR_PERCENT);
   const urlParams = useParams();
 
   const urlId = urlParams.id;
@@ -28,17 +28,17 @@ const Property = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!isDataLoaded) {
-      onLoadData();
+    if (!isOfferDataLoaded) {
+      onLoadOfferData();
     }
-  }, [isDataLoaded]);
+  }, [isOfferDataLoaded]);
 
   useEffect(() => {
     onLoadComments();
   }, [isCommentsLoaded, comment]);
 
 
-  if (!isDataLoaded) {
+  if (!isOfferDataLoaded) {
     return (
       <Loading />
     );
@@ -50,7 +50,7 @@ const Property = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to="/" className="header__logo-link" href="main.html">
+              <Link to="/" className="header__logo-link">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
               </Link>
             </div>
@@ -162,7 +162,7 @@ const Property = (props) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewesList reviews={comments}/>
+                <ReviewesList reviews={comments.slice(0, 10)}/>
                 {authorizationStatus ? <ReviewForm/> : ``}
               </section>
             </div>
@@ -184,7 +184,7 @@ const Property = (props) => {
 
 const mapStateToProps = (state) => ({
   offer: state.offer,
-  isDataLoaded: state.isDataLoaded,
+  isOfferDataLoaded: state.isOfferDataLoaded,
   isCommentsLoaded: state.isCommentsLoaded,
   authorizationStatus: state.authorizationStatus,
   email: state.email,
@@ -193,7 +193,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoadData() {
+  onLoadOfferData() {
     dispatch((fetchOffer()));
   },
   onLoadComments() {
@@ -214,9 +214,9 @@ Property.propTypes = {
   comments: PropTypes.arrayOf(REVIEW_PROP_TYPES),
   // offers: PropTypes.arrayOf(CARD_PROP_TYPES),
   offer: CARD_PROP_TYPES.isRequired,
-  isDataLoaded: PropTypes.bool.isRequired,
+  isOfferDataLoaded: PropTypes.bool.isRequired,
   isCommentsLoaded: PropTypes.bool.isRequired,
-  onLoadData: PropTypes.func.isRequired,
+  onLoadOfferData: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
   isAuth: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,

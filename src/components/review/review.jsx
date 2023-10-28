@@ -1,6 +1,7 @@
 import React from "react";
 import {REVIEW_PROP_TYPES, ONE_RATE_STAR_PERCENT} from "../../const/const";
-
+// import dayjs from 'datejs';
+const dayjs = require(`dayjs`);
 
 const Review = (props) => {
   const {reviewItem} = props;
@@ -25,7 +26,7 @@ const Review = (props) => {
           </div>
         </div>
         <p className="reviews__text">{comment}</p>
-        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+        <time className="reviews__time" dateTime="2019-04-24">{dayjs(date).format(`MMMM YYYY`)}</time>
       </div>
     </li>
 

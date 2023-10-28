@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {CARD_PROP_TYPES} from "../../const/const";
+import {CARD_PROP_TYPES, ONE_RATE_STAR_PERCENT} from "../../const/const";
 import {Link} from "react-router-dom";
 import {ActionCreator} from "../../store/action";
 import {connect} from 'react-redux';
 
 const Card = (props) => {
   const {item, onMouseOver, onMouseOut, className, classNameWrapper, nearbyFlagCard} = props;
-  const {id, isPremium, isFavorite, price, previewImage, title, type} = item;
-
+  const {id, isPremium, isFavorite, rating, price, previewImage, title, type} = item;
+  const rateWidth = Number(Math.round(rating) * ONE_RATE_STAR_PERCENT);
   const handleCardMouseOver = () => {
     onMouseOver(item);
   };
@@ -46,7 +46,7 @@ const Card = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}} />
+            <span style={{width: `${rateWidth}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

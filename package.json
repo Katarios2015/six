@@ -30,6 +30,8 @@
   },
   "dependencies": {
     "axios": "^0.21.4",
+    "datejs": "^1.0.0-rc3",
+    "dayjs": "^1.11.10",
     "history": "^4.10.1",
     "leaflet": "1.7.1",
     "nanoid": "^4.0.2",

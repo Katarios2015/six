@@ -14,7 +14,6 @@ import {cities, SORT_TYPES} from "./const/const";
 import {ActionCreator} from "./store/action";
 import {checkAuth} from "./store/action-api";
 import {redirect} from "./store/middlewares/redirect";
-
 const api = createAPI(
     () => store.dispatch(ActionCreator.requireAuthorization(false))
 );
