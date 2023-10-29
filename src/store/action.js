@@ -6,6 +6,7 @@ const ActionType = {
   SORTING: `sort/SORTING`,
   LOAD_OFFERS: `data/loadOffers`,
   LOAD_OFFER: `data/loadOffer`,
+  LOAD_FAVORITE_OFFERS: `data/loadFavoriteOffers`,
   LOAD_COMMENTS: `data/loadComments`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   AUTHORIZATION_DATA: `user/authData`,
@@ -38,6 +39,11 @@ const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers,
+  }),
+
+  loadFavoriteOffers: (favoriteOffers) => ({
+    type: ActionType.LOAD_FAVORITE_OFFERS,
+    payload: favoriteOffers,
   }),
 
   loadOffer: (offer) => ({

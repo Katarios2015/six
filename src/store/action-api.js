@@ -8,6 +8,11 @@ const fetchOffersList = () => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(ActionCreator.loadOffers(data.map(adaptToClient))))
 );
 
+const fetchFavoritesList = () => (dispatch, _getState, api) => (
+  api.get(`/favorite`)
+    .then(({data}) => dispatch(ActionCreator.loadFavoriteOffers(data.map(adaptToClient))))
+);
+
 
 const fetchOffer = () => (dispatch, getState, api) => (
   api.get(`/hotels/${getState().urlId}`)
@@ -60,5 +65,5 @@ const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => 
     .catch((error) => error)
 );
 
-export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments};
+export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments, fetchFavoritesList};
 

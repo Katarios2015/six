@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import PropTypes from 'prop-types';
 import CardsList from '../cards-list/cards-list';
 import CitiesList from '../cities-list/cities-list';
 import Map from '../map/map';
+import MainEmpty from "../main-empty/main-empty";
 import {CARD_PROP_TYPES} from '../../const/const';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
@@ -11,7 +12,6 @@ import {ActionCreator} from "../../store/action";
 
 import Loading from "../loading/loading";
 import {fetchOffersList, checkAuth} from "../../store/action-api";
-import {useEffect} from 'react';
 
 
 const MainPage = (props) => {
@@ -37,12 +37,19 @@ const MainPage = (props) => {
     }
   }, [isDataLoaded]);
 
+  useEffect(() => {
+    if (!isDataLoaded && (propertyes.length === 0)) {
+
+      <MainEmpty />;
+
+    }
+  }, [propertyes]);
+
   if (!isDataLoaded) {
     return (
       <Loading />
     );
   }
-
 
   return (
     <>

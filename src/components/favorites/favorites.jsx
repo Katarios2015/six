@@ -1,12 +1,31 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import FavoriteCardsList from '../favorite-cards-list/favorite-cards-list';
 import {CARD_PROP_TYPES} from '../../const/const';
 import {Link} from "react-router-dom";
+import {fetchFavoritesList} from "../../store/action-api";
+import Loading from "../loading/loading";
+import FavoritesEmpty from "../favorites-empty/favorites-empty";
 
 const Favorites = (props) => {
-  const {offers} = props;
+  const {favoriteOffers, isFavoriteDataLoaded, onFavoriteLoadData, email} = props;
+  useEffect(() => {
+    if (!isFavoriteDataLoaded) {
+      onFavoriteLoadData();
+    }
+  }, [isFavoriteDataLoaded]);
+
+  if (!isFavoriteDataLoaded) {
+    return (
+      <Loading />
+    );
+  }
+  if (favoriteOffers.length === 0) {
+    return (
+      <FavoritesEmpty />
+    );
+  }
   return (
     <div className="page">
       <header className="header">
@@ -23,7 +42,7 @@ const Favorites = (props) => {
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <span className="header__user-name user__name">{email}</span>
                   </a>
                 </li>
               </ul>
@@ -36,7 +55,7 @@ const Favorites = (props) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <FavoriteCardsList items={offers}/>
+              <FavoriteCardsList items={favoriteOffers}/>
             </ul>
           </section>
         </div>
@@ -50,12 +69,23 @@ const Favorites = (props) => {
   );
 };
 const mapStateToProps = (state) => ({
-  offers: state.offers
+  favoriteOffers: state.favoriteOffers,
+  isFavoriteDataLoaded: state.isFavoriteDataLoaded,
+  email: state.email,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onFavoriteLoadData() {
+    dispatch((fetchFavoritesList()));
+  },
 });
 
 Favorites.propTypes = {
-  offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired
+  favoriteOffers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
+  isFavoriteDataLoaded: PropTypes.bool.isRequired,
+  onFavoriteLoadData: PropTypes.func.isRequired,
+  email: PropTypes.string,
 };
 
 export {Favorites};
-export default connect(mapStateToProps, null)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

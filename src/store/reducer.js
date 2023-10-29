@@ -1,17 +1,19 @@
 import {DEFAULT_CITY} from "../const/const";
 import {ActionType} from "../store/action";
-
+import {getFiltredByCityOffers} from "../filter";
 
 const initialState = {
   cityName: DEFAULT_CITY,
-  propertyes: [],
-  sortType: `Popular`,
   offers: [],
+  sortType: `Popular`,
+  propertyes: [],
+  favoriteOffers: [],
   comments: [],
   offer: {},
   comment: {},
   isDataLoaded: false,
   isOfferDataLoaded: false,
+  isFavoriteDataLoaded: false,
   isCommentsLoaded: false,
   authorizationStatus: false,
   email: ``,
@@ -54,6 +56,15 @@ const reducer = (state = initialState, action) => {
         isDataLoaded: true,
       };
     }
+
+    case ActionType.LOAD_FAVORITE_OFFERS: {
+      return {
+        ...state,
+        favoriteOffers: action.payload,
+        isFavoriteDataLoaded: true,
+      };
+    }
+
     case ActionType.LOAD_OFFER: {
       return {
         ...state,
