@@ -1,21 +1,21 @@
 import {ActionCreator} from "./action";
-// import {AuthorizationStatus} from "../const/const";
-import {adaptToClient, adaptToClientReview} from "./middlewares/adapter";
+import {API_ROUTE, APP_ROUTE} from "../const/const";
+import {adaptToClient, adaptToClientReview} from "../utils/adapter";
 
 
 const fetchOffersList = () => (dispatch, _getState, api) => (
-  api.get(`/hotels`)
+  api.get(API_ROUTE.HOTELS)
     .then(({data}) => dispatch(ActionCreator.loadOffers(data.map(adaptToClient))))
 );
 
 const fetchFavoritesList = () => (dispatch, _getState, api) => (
-  api.get(`/favorite`)
+  api.get(API_ROUTE.FAVORITE)
     .then(({data}) => dispatch(ActionCreator.loadFavoriteOffers(data.map(adaptToClient))))
 );
 
 
 const fetchOffer = () => (dispatch, getState, api) => (
-  api.get(`/hotels/${getState().urlId}`)
+  api.get(`${API_ROUTE.HOTELS}/${getState().urlId}`)
     .then(({data}) => {
       dispatch(ActionCreator.loadOffer(adaptToClient(data)));
     })
@@ -23,7 +23,7 @@ const fetchOffer = () => (dispatch, getState, api) => (
 );
 
 const fetchComments = () => (dispatch, getState, api) => (
-  api.get(`/comments/${getState().urlId}`)
+  api.get(`${API_ROUTE.COMMENTS}/${getState().urlId}`)
     .then(({data}) => {
       dispatch(ActionCreator.loadComments(data.map(adaptToClientReview)));
     })
@@ -32,7 +32,7 @@ const fetchComments = () => (dispatch, getState, api) => (
 
 
 const checkAuth = () => (dispatch, _getState, api) => (
-  api.get(`/login`)
+  api.get(API_ROUTE.LOGIN)
     .then(({data}) => {
       dispatch(ActionCreator.requireAuthorization(true));
       dispatch(ActionCreator.authData({
@@ -45,7 +45,7 @@ const checkAuth = () => (dispatch, _getState, api) => (
 );
 
 const login = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.post(`/login`, {email, password})
+  api.post(APP_ROUTE.LOGIN, {email, password})
     .then(({data}) => {
       dispatch(ActionCreator.requireAuthorization(true));
       dispatch(ActionCreator.authData({
@@ -54,11 +54,11 @@ const login = ({login: email, password}) => (dispatch, _getState, api) => (
         isPro: data[`is_pro`],
       }));
     })
-    .then(() => dispatch(ActionCreator.redirectToRoute(`/`)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(APP_ROUTE.MAIN)))
 );
 
 const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => (
-  api.post(`/comments/${getState().urlId}`, {comment, rating})
+  api.post(`${APP_ROUTE.COMMENTS}/${getState().urlId}`, {comment, rating})
     .then(({data}) => {
       dispatch(ActionCreator.addComment(data));
     })

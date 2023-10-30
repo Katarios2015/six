@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../store/action-api";
 import {Link} from "react-router-dom";
+import {APP_ROUTE} from '../../const/const';
+
 
 const Login = ({onSubmit}) => {
   const loginRef = useRef(null);
@@ -21,7 +23,7 @@ const Login = ({onSubmit}) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to="/" className="header__logo-link" >
+              <Link to={APP_ROUTE.MAIN} className="header__logo-link" >
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
               </Link>
             </div>
@@ -73,9 +75,9 @@ const Login = ({onSubmit}) => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link to={APP_ROUTE.MAIN} className="locations__item-link">
+                <span>Paris</span>
+              </Link>
             </div>
           </section>
         </div>

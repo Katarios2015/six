@@ -1,6 +1,6 @@
 import {DEFAULT_CITY} from "../const/const";
 import {ActionType} from "../store/action";
-import {getFiltredByCityOffers} from "../filter";
+
 
 const initialState = {
   cityName: DEFAULT_CITY,

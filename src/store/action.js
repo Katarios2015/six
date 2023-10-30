@@ -1,4 +1,4 @@
-import {getFiltredByCityOffers} from "../../src/filter";
+import {getFiltredByCityOffers} from "../../src/utils/filter";
 const ActionType = {
   CITY_ON_CHANGE: `city/CITY_ON_CHANGE`,
   GET_OFFER_ID: `card/GET_OFFER_ID`,

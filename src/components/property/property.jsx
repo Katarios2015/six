@@ -3,9 +3,10 @@ import {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link, useParams} from "react-router-dom";
 import PropTypes from "prop-types";
-import {CARD_PROP_TYPES, REVIEW_PROP_TYPES, ONE_RATE_STAR_PERCENT} from "../../const/const";
+import {CARD_PROP_TYPES, REVIEW_PROP_TYPES, ONE_RATE_STAR_PERCENT, APP_ROUTE} from "../../const/const";
 import ReviewForm from "../review-form/review-form";
 import ReviewesList from "../reviewes-list/reviewes-list";
+import ImagesList from "../property-images-list/property-images-list";
 // import {Map} from '../map/map';
 // import CardsList from '../cards-list/cards-list';
 import {fetchOffer, fetchComments, checkAuth} from "../../store/action-api";
@@ -15,7 +16,7 @@ import {ActionCreator} from "../../store/action";
 const Property = (props) => {
   const {offer, comments, authorizationStatus, isOfferDataLoaded, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, getOfferId, comment} = props;
 
-  const {bedrooms, description, goods, host, images, isPremium, maxAdults, price, rating, title, type} = offer;
+  const {bedrooms, description, goods, host, isPremium, maxAdults, price, rating, title, type} = offer;
 
   const rateWidth = Number(Math.round(rating) * ONE_RATE_STAR_PERCENT);
   const urlParams = useParams();
@@ -50,7 +51,7 @@ const Property = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to="/" className="header__logo-link">
+              <Link to={APP_ROUTE.MAIN} className="header__logo-link">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
               </Link>
             </div>
@@ -58,14 +59,14 @@ const Property = (props) => {
               <ul className="header__nav-list">
                 {authorizationStatus ?
                   <li className="header__nav-item user">
-                    <Link to="/favorites" className="header__nav-link header__nav-link--profile" >
+                    <Link to={APP_ROUTE.FAVORITES} className="header__nav-link header__nav-link--profile" >
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">{email}</span>
                     </Link>
                   </li> :
                   <li className="header__nav-item user">
-                    <Link to="/login" className="header__nav-link header__nav-link--profile" href="#">
+                    <Link to={APP_ROUTE.LOGIN} className="header__nav-link header__nav-link--profile" href="#">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__login">Sign in</span>
@@ -80,15 +81,7 @@ const Property = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((img, index) => {
-                return (
-                  <div key={index} className="property__image-wrapper">
-                    <img className="property__image" src={img}
-                      alt={`Photo ${type}`}/>
-                  </div>
-                );
-              })
-              }
+              <ImagesList propertyItem={offer}/>
             </div>
           </div>
           <div className="property__container container">
@@ -139,7 +132,6 @@ const Property = (props) => {
                       </li>
                     );
                   }) }
-
                 </ul>
               </div>
               <div className="property__host">

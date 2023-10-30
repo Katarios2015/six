@@ -51,10 +51,12 @@ const Map = (props) => {
         attribution: `© OpenStreetMap contributors © CARTO>`
       })
       .addTo(mapRef.current);
+
     return () => {
       mapRef.current.remove();
     };
   }, [mapRef, mapOffers, cityName]);
+
   useEffect(() => {
     mapOffers.forEach((offer) => {
       const activePin = activeCard ? activeCard.id === offer.id : false;

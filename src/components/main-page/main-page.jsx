@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import CardsList from '../cards-list/cards-list';
 import CitiesList from '../cities-list/cities-list';
 import Map from '../map/map';
-import MainEmpty from "../main-empty/main-empty";
-import {CARD_PROP_TYPES} from '../../const/const';
+// import MainEmpty from "../main-empty/main-empty";
+import {CARD_PROP_TYPES, APP_ROUTE} from '../../const/const';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import SortForm from '../sort/sort';
@@ -18,6 +18,8 @@ const MainPage = (props) => {
 
   const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, onLoadData, isAuth} = props;
   const placesCount = propertyes.length;
+
+
   const [activeCard, setActiveCard] = useState(null);
   const handleCardMouseOver = (item) => {
     setActiveCard(item);
@@ -25,6 +27,7 @@ const MainPage = (props) => {
   const handleCardMouseOut = () => {
     setActiveCard(null);
   };
+
 
   useEffect(() => {
     isAuth();
@@ -37,13 +40,11 @@ const MainPage = (props) => {
     }
   }, [isDataLoaded]);
 
-  useEffect(() => {
-    if (!isDataLoaded && (propertyes.length === 0)) {
-
-      <MainEmpty />;
-
+  /* useEffect(() => {
+    if (isDataLoaded && (placesCount === 0)) {
+      mainEmpty();
     }
-  }, [propertyes]);
+  }, [isDataLoaded, cityName, placesCount]);*/
 
   if (!isDataLoaded) {
     return (
@@ -69,14 +70,15 @@ const MainPage = (props) => {
                 <ul className="header__nav-list">
                   {authorizationStatus ?
                     <li className="header__nav-item user">
-                      <Link to="/favorites" className="header__nav-link header__nav-link--profile" >
+                      <Link to={APP_ROUTE.FAVORITES} className="header__nav-link header__nav-link--profile" >
                         <div className="header__avatar-wrapper user__avatar-wrapper">
                         </div>
-                        <span className="header__user-name user__name">{email}</span>
+                        <span className="header__user-name user__name">{email}
+                        </span>
                       </Link>
                     </li> :
                     <li className="header__nav-item user">
-                      <Link to="/login" className="header__nav-link header__nav-link--profile" href="#">
+                      <Link to={APP_ROUTE.LOGIN} className="header__nav-link header__nav-link--profile" href="#">
                         <div className="header__avatar-wrapper user__avatar-wrapper">
                         </div>
                         <span className="header__login">Sign in</span>

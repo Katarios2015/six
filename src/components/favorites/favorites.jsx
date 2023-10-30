@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import FavoriteCardsList from '../favorite-cards-list/favorite-cards-list';
-import {CARD_PROP_TYPES} from '../../const/const';
+import {CARD_PROP_TYPES, APP_ROUTE} from '../../const/const';
 import {Link} from "react-router-dom";
 import {fetchFavoritesList} from "../../store/action-api";
 import Loading from "../loading/loading";
@@ -32,7 +32,7 @@ const Favorites = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to="/" className="header__logo-link">
+              <Link to={APP_ROUTE.MAIN} className="header__logo-link">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
               </Link>
             </div>
@@ -61,7 +61,7 @@ const Favorites = (props) => {
         </div>
       </main>
       <footer className="footer container">
-        <Link to="/" className="footer__logo-link">
+        <Link to={APP_ROUTE.MAIN} className="footer__logo-link">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width={64} height={33} />
         </Link>
       </footer>

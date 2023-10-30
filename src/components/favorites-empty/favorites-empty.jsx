@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {APP_ROUTE} from '../../const/const';
 
 const FavoritesEmpty = (props) => {
   const {email} = props;
@@ -19,7 +20,7 @@ const FavoritesEmpty = (props) => {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <Link to="/" className="header__logo-link">
+                <Link to={APP_ROUTE.MAIN} className="header__logo-link">
                   <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
                 </Link>
               </div>
@@ -49,9 +50,9 @@ const FavoritesEmpty = (props) => {
           </div>
         </main>
         <footer className="footer">
-          <a className="footer__logo-link" href="main.html">
+          <Link to={APP_ROUTE.MAIN} className="footer__logo-link">
             <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width={64} height={33} />
-          </a>
+          </Link>
         </footer>
       </div>
     </React.Fragment>
