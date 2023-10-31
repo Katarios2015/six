@@ -8,7 +8,7 @@ import {CARD_PROP_TYPES, APP_ROUTE} from '../../const/const';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import SortForm from '../sort/sort';
-import {ActionCreator} from "../../store/action";
+import {sort, addPropertyes} from "../../store/action";
 
 import Loading from "../loading/loading";
 import {fetchOffersList, checkAuth} from "../../store/action-api";
@@ -159,10 +159,10 @@ MainPage.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   sort(sortType) {
-    dispatch(ActionCreator.sort(sortType));
+    dispatch(sort(sortType));
   },
   addPropertyes(cityName, offers, sortType) {
-    dispatch(ActionCreator.addPropertyes(cityName, offers, sortType));
+    dispatch(addPropertyes(cityName, offers, sortType));
   },
   onLoadData() {
     dispatch((fetchOffersList()));

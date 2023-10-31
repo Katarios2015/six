@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {ActionCreator} from "../../store/action";
+import {sort} from "../../store/action";
 import {connect} from 'react-redux';
 import {CARD_PROP_TYPES} from '../../const/const';
 
@@ -41,7 +41,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   sort(sortType) {
-    dispatch(ActionCreator.sort(sortType));
+    dispatch(sort(sortType));
   },
 });
 

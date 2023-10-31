@@ -3,7 +3,7 @@ import CardNearby from "../card-nearby/card-nearby";
 import CardCities from "../card-cities/card-cities";
 import PropTypes from 'prop-types';
 import {CARD_PROP_TYPES} from '../../const/const';
-import {ActionCreator} from "../../store/action";
+import {addPropertyes} from "../../store/action";
 import {connect} from 'react-redux';
 import {useEffect} from 'react';
 
@@ -63,7 +63,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addPropertyes(cityName, offers, sortType) {
-    dispatch(ActionCreator.addPropertyes(cityName, offers, sortType));
+    dispatch(addPropertyes(cityName, offers, sortType));
   },
 });
 

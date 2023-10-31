@@ -11,7 +11,7 @@ import ImagesList from "../property-images-list/property-images-list";
 // import CardsList from '../cards-list/cards-list';
 import {fetchOffer, fetchComments, checkAuth} from "../../store/action-api";
 import Loading from "../loading/loading";
-import {ActionCreator} from "../../store/action";
+import {getOfferId, addComment} from "../../store/action";
 
 const Property = (props) => {
   const {offer, comments, authorizationStatus, isOfferDataLoaded, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, getOfferId, comment} = props;
@@ -195,10 +195,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch((checkAuth()));
   },
   getOfferId(urlId) {
-    dispatch(ActionCreator.getOfferId(urlId));
+    dispatch(getOfferId(urlId));
   },
   addComment(comment) {
-    dispatch(ActionCreator.addComment(comment));
+    dispatch(addComment(comment));
   }
 });
 

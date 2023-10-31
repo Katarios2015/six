@@ -15,66 +15,77 @@ const ActionType = {
 };
 
 
-const ActionCreator = {
-  cityOnChange: (cityName) => ({
-    type: ActionType.CITY_ON_CHANGE,
-    payload: cityName
-  }),
+const cityOnChange = (cityName) => ({
+  type: ActionType.CITY_ON_CHANGE,
+  payload: cityName
+});
 
-  getOfferId: (urlId) => ({
-    type: ActionType.GET_OFFER_ID,
-    payload: urlId
-  }),
+const getOfferId = (urlId) => ({
+  type: ActionType.GET_OFFER_ID,
+  payload: urlId
+});
 
-  sort: (sortType) => ({
-    type: ActionType.SORTING,
-    payload: sortType,
-  }),
+const sort = (sortType) => ({
+  type: ActionType.SORTING,
+  payload: sortType,
+});
 
-  addPropertyes: (cityName, offers, sortType) => ({
-    type: ActionType.ADD_PROPERTYES,
-    payload: getFiltredByCityOffers(cityName, offers, sortType)
-  }),
+const addPropertyes = (cityName, offers, sortType) => ({
+  type: ActionType.ADD_PROPERTYES,
+  payload: getFiltredByCityOffers(cityName, offers, sortType)
+});
 
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers,
-  }),
+const loadOffers = (offers) => ({
+  type: ActionType.LOAD_OFFERS,
+  payload: offers,
+});
 
-  loadFavoriteOffers: (favoriteOffers) => ({
-    type: ActionType.LOAD_FAVORITE_OFFERS,
-    payload: favoriteOffers,
-  }),
+const loadFavoriteOffers = (favoriteOffers) => ({
+  type: ActionType.LOAD_FAVORITE_OFFERS,
+  payload: favoriteOffers,
+});
 
-  loadOffer: (offer) => ({
-    type: ActionType.LOAD_OFFER,
-    payload: offer,
-  }),
+const loadOffer = (offer) => ({
+  type: ActionType.LOAD_OFFER,
+  payload: offer,
+});
 
-  loadComments: (comments) => ({
-    type: ActionType.LOAD_COMMENTS,
-    payload: comments,
-  }),
+const loadComments = (comments) => ({
+  type: ActionType.LOAD_COMMENTS,
+  payload: comments,
+});
 
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
+const requireAuthorization = (status) => ({
+  type: ActionType.REQUIRED_AUTHORIZATION,
+  payload: status,
+});
 
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
+const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
 
-  authData: (data) => ({
-    type: ActionType.AUTHORIZATION_DATA,
-    payload: data,
-  }),
+const authData = (data) => ({
+  type: ActionType.AUTHORIZATION_DATA,
+  payload: data,
+});
 
-  addComment: (comment)=>({
-    type: ActionType.ADD_COMMENT,
-    payload: comment,
-  }),
-};
+const addComment = (comment)=>({
+  type: ActionType.ADD_COMMENT,
+  payload: comment,
+});
 
-export {ActionType, ActionCreator};
+
+export {ActionType,
+  cityOnChange,
+  getOfferId,
+  sort,
+  addPropertyes,
+  loadOffers,
+  loadFavoriteOffers,
+  loadOffer,
+  loadComments,
+  requireAuthorization,
+  redirectToRoute,
+  authData,
+  addComment};

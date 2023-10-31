@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {CARD_PROP_TYPES, ONE_RATE_STAR_PERCENT} from "../../const/const";
 import {Link} from "react-router-dom";
-import {ActionCreator} from "../../store/action";
-import {connect} from 'react-redux';
+
 
 const Card = (props) => {
   const {item, onMouseOver, onMouseOut, className, classNameWrapper, nearbyFlagCard} = props;
@@ -70,17 +69,8 @@ Card.propTypes = {
   nearbyFlagCard: PropTypes.bool.isRequired,
   className: PropTypes.string.isRequired,
   classNameWrapper: PropTypes.string.isRequired,
-  getOfferIdOnClick: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  getOfferIdOnClick(id) {
-    dispatch(ActionCreator.getOfferIdOnClick(id));
-  },
-});
 
+export default Card;
 
-export {Card};
-
-
-export default connect(null, mapDispatchToProps)(Card);

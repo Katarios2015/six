@@ -11,11 +11,11 @@ import createAPI from "./services/api";
 // import {reviews} from "./mocks/offers";
 import {reducer} from "./store/reducer";
 import {cities, SORT_TYPES} from "./const/const";
-import {ActionCreator} from "./store/action";
+import {requireAuthorization} from "./store/action";
 import {checkAuth} from "./store/action-api";
 import {redirect} from "./store/middlewares/redirect";
 const api = createAPI(
-    () => store.dispatch(ActionCreator.requireAuthorization(false))
+    () => store.dispatch(requireAuthorization(false))
 );
 
 const store = createStore(
