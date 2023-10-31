@@ -129,15 +129,15 @@ const MainPage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  propertyes: state.propertyes,
-  cityName: state.cityName,
-  sortType: state.sortType,
-  isDataLoaded: state.isDataLoaded,
-  authorizationStatus: state.authorizationStatus,
-  email: state.email,
-  avatarUrl: state.avatarUrl,
+const mapStateToProps = ({OFFERS, PROPERTYES, CITY, SORT, CHECK_AUTH, AUTH_DATA}) => ({
+  offers: OFFERS.offers,
+  propertyes: PROPERTYES.propertyes,
+  cityName: CITY.cityName,
+  sortType: SORT.sortType,
+  isDataLoaded: OFFERS.isDataLoaded,
+  authorizationStatus: CHECK_AUTH.authorizationStatus,
+  email: AUTH_DATA.email,
+  avatarUrl: AUTH_DATA.avatarUrl,
 });
 
 

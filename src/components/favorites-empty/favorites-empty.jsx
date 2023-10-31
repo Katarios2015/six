@@ -59,8 +59,8 @@ const FavoritesEmpty = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  email: state.email,
+const mapStateToProps = ({AUTH_DATA}) => ({
+  email: AUTH_DATA.email,
 });
 
 FavoritesEmpty.propTypes = {

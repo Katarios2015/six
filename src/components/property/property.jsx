@@ -14,7 +14,7 @@ import Loading from "../loading/loading";
 import {getOfferId, addComment} from "../../store/action";
 
 const Property = (props) => {
-  const {offer, comments, authorizationStatus, isOfferDataLoaded, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, getOfferId, comment} = props;
+  const {offer, comments, authorizationStatus, isOfferDataLoaded, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, comment} = props;
 
   const {bedrooms, description, goods, host, isPremium, maxAdults, price, rating, title, type} = offer;
 
@@ -174,14 +174,14 @@ const Property = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  offer: state.offer,
-  isOfferDataLoaded: state.isOfferDataLoaded,
-  isCommentsLoaded: state.isCommentsLoaded,
-  authorizationStatus: state.authorizationStatus,
-  email: state.email,
-  comments: state.comments,
-  comment: state.comment
+const mapStateToProps = ({PROPERTY, COMMENTS, CHECK_AUTH, AUTH_DATA, ADD_COMMENT}) => ({
+  offer: PROPERTY.offer,
+  isOfferDataLoaded: PROPERTY.isOfferDataLoaded,
+  isCommentsLoaded: COMMENTS.isCommentsLoaded,
+  authorizationStatus: CHECK_AUTH.authorizationStatus,
+  email: AUTH_DATA.email,
+  comments: COMMENTS.comments,
+  comment: ADD_COMMENT.comment,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -214,9 +214,7 @@ Property.propTypes = {
   authorizationStatus: PropTypes.bool.isRequired,
   email: PropTypes.string,
   addComment: PropTypes.func.isRequired,
-  getOfferId: PropTypes.func.isRequired,
   comment: PropTypes.obj,
-
 };
 
 export {Property};

@@ -80,8 +80,8 @@ const Map = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  mapOffers: state.propertyes,
+const mapStateToProps = ({PROPERTYES}) => ({
+  mapOffers: PROPERTYES.propertyes,
 });
 
 Map.propTypes = {

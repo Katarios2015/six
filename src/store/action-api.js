@@ -1,4 +1,4 @@
-import {ActionCreator, loadOffers, loadFavoriteOffers, loadOffer, redirectToRoute, loadComments, requireAuthorization, authData, addComment} from "./action";
+import {loadOffers, loadFavoriteOffers, loadOffer, redirectToRoute, loadComments, requireAuthorization, authData, addComment} from "./action";
 import {API_ROUTE, APP_ROUTE} from "../const/const";
 import {adaptToClient, adaptToClientReview} from "../utils/adapter";
 

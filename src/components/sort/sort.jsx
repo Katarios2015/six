@@ -35,8 +35,8 @@ const SortForm = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  sortType: state.sortType,
+const mapStateToProps = ({SORT}) => ({
+  sortType: SORT.sortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({

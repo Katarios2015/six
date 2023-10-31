@@ -54,11 +54,11 @@ const CardsList = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  propertyes: state.propertyes,
-  cityName: state.cityName,
-  sortType: state.sortType,
-  offers: state.offers,
+const mapStateToProps = ({PROPERTYES, CITY, SORT, OFFERS}) => ({
+  propertyes: PROPERTYES.propertyes,
+  cityName: CITY.cityName,
+  sortType: SORT.sortType,
+  offers: OFFERS.offers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

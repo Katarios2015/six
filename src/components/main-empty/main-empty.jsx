@@ -58,8 +58,8 @@ MainEmpty.propTypes = {
   email: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  email: state.email,
+const mapStateToProps = ({AUTH_DATA}) => ({
+  email: AUTH_DATA.email,
 });
 
 export {MainEmpty};
