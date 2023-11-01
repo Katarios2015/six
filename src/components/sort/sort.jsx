@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {CARD_PROP_TYPES} from '../../const/const';
 
 const SortForm = (props) => {
-  const {sortType, sortList, sort} = props;
+  const {sortType, sortList, onSort} = props;
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -20,7 +20,7 @@ const SortForm = (props) => {
           return (
             <li
               onClick={()=> {
-                sort(type);
+                onSort(type);
               }}
               tabndex={0}
               key={index}
@@ -40,7 +40,7 @@ const mapStateToProps = ({SORT}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  sort(sortType) {
+  onSort(sortType) {
     dispatch(sort(sortType));
   },
 });
@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
 SortForm.propTypes = {
   sortList: PropTypes.arrayOf(PropTypes.string).isRequired,
   sortType: PropTypes.string.isRequired,
-  sort: PropTypes.func.isRequired,
+  onSort: PropTypes.func.isRequired,
   propertyes: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
 };
 

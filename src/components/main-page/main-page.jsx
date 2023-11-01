@@ -8,7 +8,7 @@ import {CARD_PROP_TYPES, APP_ROUTE} from '../../const/const';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import SortForm from '../sort/sort';
-import {sort, addPropertyes} from "../../store/action";
+// import {sort, addPropertyes} from "../../store/action";
 
 import Loading from "../loading/loading";
 import {fetchOffersList, checkAuth} from "../../store/action-api";
@@ -140,6 +140,15 @@ const mapStateToProps = ({OFFERS, PROPERTYES, CITY, SORT, CHECK_AUTH, AUTH_DATA}
   avatarUrl: AUTH_DATA.avatarUrl,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onLoadData() {
+    dispatch((fetchOffersList()));
+  },
+  isAuth() {
+    dispatch((checkAuth()));
+  },
+});
+
 
 MainPage.propTypes = {
   propertyes: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
@@ -156,21 +165,6 @@ MainPage.propTypes = {
   avatarUrl: PropTypes.string,
 };
 
-
-const mapDispatchToProps = (dispatch) => ({
-  sort(sortType) {
-    dispatch(sort(sortType));
-  },
-  addPropertyes(cityName, offers, sortType) {
-    dispatch(addPropertyes(cityName, offers, sortType));
-  },
-  onLoadData() {
-    dispatch((fetchOffersList()));
-  },
-  isAuth() {
-    dispatch((checkAuth()));
-  },
-});
 
 export {MainPage};
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

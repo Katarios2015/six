@@ -15,7 +15,7 @@ import Loading from "../loading/loading";
 import {getOfferId, addComment} from "../../store/action";
 
 const Property = (props) => {
-  const {offer, comments, authorizationStatus, isOfferDataLoaded, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, comment} = props;
+  const {offer, comments, authorizationStatus, isOfferDataLoaded, offerId, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, comment} = props;
 
   const {bedrooms, description, goods, host, isPremium, maxAdults, price, rating, title, type} = offer;
 
@@ -23,13 +23,10 @@ const Property = (props) => {
   const urlParams = useParams();
 
   const urlId = Number(urlParams.id);
-  console.log(urlId);
-
 
   useEffect(() => {
     isAuth();
-    getOfferId(urlId);
-    console.log(getOfferId(urlId));
+    offerId(urlId);
   }, []);
 
   useEffect(() => {
@@ -199,9 +196,8 @@ const mapDispatchToProps = (dispatch) => ({
   isAuth() {
     dispatch((checkAuth()));
   },
-  getOfferId(urlId) {
+  offerId(urlId) {
     dispatch(getOfferId(urlId));
-
   },
   addComment(comment) {
     dispatch(addComment(comment));
@@ -221,6 +217,7 @@ Property.propTypes = {
   email: PropTypes.string,
   addComment: PropTypes.func.isRequired,
   comment: PropTypes.obj,
+  offerId: PropTypes.func.isRequired,
 };
 
 export {Property};

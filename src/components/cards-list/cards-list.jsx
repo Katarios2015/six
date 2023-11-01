@@ -36,10 +36,10 @@ const getCardByNearbyFlag = (flag, offer, handleCardMouseOver, handleCardMouseOu
 
 
 const CardsList = (props) => {
-  const {offers, nearbyFlag, cityName, propertyes, sortType, addPropertyes, handleCardMouseOver, handleCardMouseOut} = props;
+  const {offers, nearbyFlag, cityName, propertyes, sortType, sortOffers, handleCardMouseOver, handleCardMouseOut} = props;
 
   useEffect(() => {
-    addPropertyes(cityName, offers, sortType);
+    sortOffers(cityName, offers, sortType);
   }, [cityName, sortType]);
 
   return (
@@ -62,7 +62,7 @@ const mapStateToProps = ({PROPERTYES, CITY, SORT, OFFERS}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addPropertyes(cityName, offers, sortType) {
+  sortOffers(cityName, offers, sortType) {
     dispatch(addPropertyes(cityName, offers, sortType));
   },
 });
@@ -72,7 +72,7 @@ CardsList.propTypes = {
   offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
   nearbyFlag: PropTypes.bool.isRequired,
   cityName: PropTypes.string.isRequired,
-  addPropertyes: PropTypes.func.isRequired,
+  sortOffers: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
   handleCardMouseOver: PropTypes.func,
   handleCardMouseOut: PropTypes.func,

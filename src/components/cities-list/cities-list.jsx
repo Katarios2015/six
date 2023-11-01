@@ -4,7 +4,7 @@ import {cityOnChange} from "../../store/action";
 import {connect} from 'react-redux';
 
 const CitiesList = (props) => {
-  const {cities, cityName, cityOnChange} = props;
+  const {cities, cityName, cityOnClick} = props;
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city, index) => {
@@ -12,7 +12,7 @@ const CitiesList = (props) => {
           <li key={index} className="locations__item">
             <a className={city === cityName ? `locations__item-link tabs__item tabs__item--active` : `locations__item-link tabs__item`} href="#"
               onClick={()=> {
-                cityOnChange(city);
+                cityOnClick(city);
               }}
             >
               <span>{city}</span>
@@ -29,7 +29,7 @@ const mapStateToProps = ({CITY}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  cityOnChange(city) {
+  cityOnClick(city) {
     dispatch(cityOnChange(city));
   },
 });
@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch) => ({
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   cityName: PropTypes.string.isRequired,
-  cityOnChange: PropTypes.func.isRequired,
+  cityOnClick: PropTypes.func.isRequired,
 };
 
 export {CitiesList};

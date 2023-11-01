@@ -21,7 +21,6 @@ const fetchOffer = () => (dispatch, getState, api) => (
     })
     .catch(() => {
       dispatch(redirectToRoute(`/offer/`));
-      console.log(`${API_ROUTE.HOTELS}/${getState().urlId}`);
     }
     )
 );

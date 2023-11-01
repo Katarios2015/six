@@ -8,7 +8,6 @@ const Review = (props) => {
   const {comment, date, user, rating} = reviewItem;
   const rateWidth = Number(rating * ONE_RATE_STAR_PERCENT);
   return (
-
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
@@ -29,7 +28,6 @@ const Review = (props) => {
         <time className="reviews__time" dateTime="2019-04-24">{dayjs(date).format(`MMMM YYYY`)}</time>
       </div>
     </li>
-
   );
 };
 
