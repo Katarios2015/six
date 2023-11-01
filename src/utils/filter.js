@@ -28,9 +28,6 @@ const getSortedCards = (filtredOffers, sortType) => {
 const getFiltredByCityOffers = (cityName, offers, sortType) => {
   const filtredByCityOffers = offers.filter((offer) => offer.city.name === cityName);
   const filtredPropertyes = getSortedCards(filtredByCityOffers, sortType);
-  if (cityName === `Amsterdam`) {
-    filtredPropertyes.length = 0;
-  }
   return filtredPropertyes;
 };
 
