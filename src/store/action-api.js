@@ -15,11 +15,15 @@ const fetchFavoritesList = () => (dispatch, _getState, api) => (
 
 
 const fetchOffer = () => (dispatch, getState, api) => (
-  api.get(`${API_ROUTE.HOTELS}/${getState().urlId}`)
+  api.get(`${API_ROUTE.HOTELS}/${getState().OFFER_ID.urlId}`)
     .then(({data}) => {
       dispatch(loadOffer(adaptToClient(data)));
     })
-    .catch(() => dispatch(redirectToRoute(`/offer/`)))
+    .catch(() => {
+      dispatch(redirectToRoute(`/offer/`));
+      console.log(`${API_ROUTE.HOTELS}/${getState().urlId}`);
+    }
+    )
 );
 
 const fetchComments = () => (dispatch, getState, api) => (

@@ -14,7 +14,6 @@ const ActionType = {
   ADD_COMMENT: `offer/addComment`,
 };
 
-
 const cityOnChange = (cityName) => ({
   type: ActionType.CITY_ON_CHANGE,
   payload: cityName
@@ -22,9 +21,8 @@ const cityOnChange = (cityName) => ({
 
 const getOfferId = (urlId) => ({
   type: ActionType.GET_OFFER_ID,
-  payload: urlId
+  payload: urlId,
 });
-
 const sort = (sortType) => ({
   type: ActionType.SORTING,
   payload: sortType,

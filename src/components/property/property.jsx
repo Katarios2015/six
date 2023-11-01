@@ -1,6 +1,7 @@
 import React from "react";
 import {useEffect} from 'react';
 import {connect} from 'react-redux';
+// import {useSelector, useDispatch} from 'react-redux';
 import {Link, useParams} from "react-router-dom";
 import PropTypes from "prop-types";
 import {CARD_PROP_TYPES, REVIEW_PROP_TYPES, ONE_RATE_STAR_PERCENT, APP_ROUTE} from "../../const/const";
@@ -21,11 +22,14 @@ const Property = (props) => {
   const rateWidth = Number(Math.round(rating) * ONE_RATE_STAR_PERCENT);
   const urlParams = useParams();
 
-  const urlId = urlParams.id;
+  const urlId = Number(urlParams.id);
+  console.log(urlId);
+
 
   useEffect(() => {
     isAuth();
     getOfferId(urlId);
+    console.log(getOfferId(urlId));
   }, []);
 
   useEffect(() => {
@@ -174,7 +178,7 @@ const Property = (props) => {
   );
 };
 
-const mapStateToProps = ({PROPERTY, COMMENTS, CHECK_AUTH, AUTH_DATA, ADD_COMMENT}) => ({
+const mapStateToProps = ({PROPERTY, COMMENTS, CHECK_AUTH, AUTH_DATA, ADD_COMMENT, OFFER_ID}) => ({
   offer: PROPERTY.offer,
   isOfferDataLoaded: PROPERTY.isOfferDataLoaded,
   isCommentsLoaded: COMMENTS.isCommentsLoaded,
@@ -182,6 +186,7 @@ const mapStateToProps = ({PROPERTY, COMMENTS, CHECK_AUTH, AUTH_DATA, ADD_COMMENT
   email: AUTH_DATA.email,
   comments: COMMENTS.comments,
   comment: ADD_COMMENT.comment,
+  urlId: OFFER_ID.urlId
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -196,6 +201,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getOfferId(urlId) {
     dispatch(getOfferId(urlId));
+
   },
   addComment(comment) {
     dispatch(addComment(comment));
