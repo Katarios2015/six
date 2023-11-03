@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import "leaflet/dist/leaflet.css";
 import {CARD_PROP_TYPES} from "../../const/const";
 import {connect} from 'react-redux';
+import {getPropertyes} from "../../store/add-propertyes/selectors";
 
 let location;
 const getLocation = (array, city) => {
@@ -80,8 +81,8 @@ const Map = (props) => {
   );
 };
 
-const mapStateToProps = ({PROPERTYES}) => ({
-  mapOffers: PROPERTYES.propertyes,
+const mapStateToProps = (state) => ({
+  mapOffers: getPropertyes(state),
 });
 
 Map.propTypes = {

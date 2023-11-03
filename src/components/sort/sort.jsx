@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {sort} from "../../store/action";
 import {connect} from 'react-redux';
 import {CARD_PROP_TYPES} from '../../const/const';
+import {getSortType} from "../../store/sort/selectors";
 
 const SortForm = (props) => {
   const {sortType, sortList, onSort} = props;
@@ -35,8 +36,8 @@ const SortForm = (props) => {
   );
 };
 
-const mapStateToProps = ({SORT}) => ({
-  sortType: SORT.sortType,
+const mapStateToProps = (state) => ({
+  sortType: getSortType(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

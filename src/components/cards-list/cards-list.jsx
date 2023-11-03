@@ -7,6 +7,12 @@ import {addPropertyes} from "../../store/action";
 import {connect} from 'react-redux';
 import {useEffect} from 'react';
 
+import {getPropertyes} from "../../store/add-propertyes/selectors";
+import {getCityName} from "../../store/city/selectors";
+import {getSortType} from "../../store/sort/selectors";
+import {getOffers} from "../../store/load-offers/selectors";
+
+
 const getCardByNearbyFlag = (flag, offer, handleCardMouseOver, handleCardMouseOut) => {
 
   if (flag) {
@@ -54,11 +60,11 @@ const CardsList = (props) => {
   );
 };
 
-const mapStateToProps = ({PROPERTYES, CITY, SORT, OFFERS}) => ({
-  propertyes: PROPERTYES.propertyes,
-  cityName: CITY.cityName,
-  sortType: SORT.sortType,
-  offers: OFFERS.offers,
+const mapStateToProps = (state) => ({
+  propertyes: getPropertyes(state),
+  cityName: getCityName(state),
+  sortType: getSortType(state),
+  offers: getOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

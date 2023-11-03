@@ -8,6 +8,9 @@ import {fetchFavoritesList} from "../../store/action-api";
 import Loading from "../loading/loading";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 
+import {getEmail} from "../../store/auth-data/selectors";
+import {getFavoriteOffers, getFavoriteDataLoaded} from "../../store/load-favorite-offers/selectors";
+
 const Favorites = (props) => {
   const {favoriteOffers, isFavoriteDataLoaded, onFavoriteLoadData, email} = props;
   useEffect(() => {
@@ -68,10 +71,10 @@ const Favorites = (props) => {
     </div>
   );
 };
-const mapStateToProps = ({FAVORITIES, AUTH_DATA}) => ({
-  favoriteOffers: FAVORITIES.favoriteOffers,
-  isFavoriteDataLoaded: FAVORITIES.isFavoriteDataLoaded,
-  email: AUTH_DATA.email,
+const mapStateToProps = (state) => ({
+  favoriteOffers: getFavoriteOffers(state),
+  isFavoriteDataLoaded: getFavoriteDataLoaded(state),
+  email: getEmail(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

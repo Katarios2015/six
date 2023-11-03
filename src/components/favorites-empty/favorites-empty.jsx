@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {APP_ROUTE} from '../../const/const';
+import {getEmail} from "../../store/auth-data/selectors";
 
 const FavoritesEmpty = (props) => {
   const {email} = props;
@@ -59,8 +60,8 @@ const FavoritesEmpty = (props) => {
   );
 };
 
-const mapStateToProps = ({AUTH_DATA}) => ({
-  email: AUTH_DATA.email,
+const mapStateToProps = (state) => ({
+  email: getEmail(state),
 });
 
 FavoritesEmpty.propTypes = {

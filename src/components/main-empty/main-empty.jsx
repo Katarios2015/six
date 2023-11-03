@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {cities, APP_ROUTE} from "../../const/const";
+import {getEmail} from "../../store/auth-data/selectors";
 
 const MainEmpty = (props) => {
   const {email} = props;
@@ -57,9 +58,8 @@ const MainEmpty = (props) => {
 MainEmpty.propTypes = {
   email: PropTypes.string,
 };
-
-const mapStateToProps = ({AUTH_DATA}) => ({
-  email: AUTH_DATA.email,
+const mapStateToProps = (state) => ({
+  email: getEmail(state),
 });
 
 export {MainEmpty};

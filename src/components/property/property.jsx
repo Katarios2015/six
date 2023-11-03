@@ -14,6 +14,14 @@ import {fetchOffer, fetchComments, checkAuth} from "../../store/action-api";
 import Loading from "../loading/loading";
 import {getOfferId, addComment} from "../../store/action";
 
+import {getEmail} from "../../store/auth-data/selectors";
+import {getAuthStatus} from "../../store/auth-check/selectors";
+import {getComment} from "../../store/add-comment/selectors";
+import {getOffer, getOfferDataLoaded} from "../../store/load-property/selectors";
+import {getComments, getCommentsLoaded} from "../../store/load-comments/selectors";
+
+import {getUrlId} from "../../store/offer-id/selectors";
+
 const Property = (props) => {
   const {offer, comments, authorizationStatus, isOfferDataLoaded, offerId, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, comment} = props;
 
@@ -175,15 +183,15 @@ const Property = (props) => {
   );
 };
 
-const mapStateToProps = ({PROPERTY, COMMENTS, CHECK_AUTH, AUTH_DATA, ADD_COMMENT, OFFER_ID}) => ({
-  offer: PROPERTY.offer,
-  isOfferDataLoaded: PROPERTY.isOfferDataLoaded,
-  isCommentsLoaded: COMMENTS.isCommentsLoaded,
-  authorizationStatus: CHECK_AUTH.authorizationStatus,
-  email: AUTH_DATA.email,
-  comments: COMMENTS.comments,
-  comment: ADD_COMMENT.comment,
-  urlId: OFFER_ID.urlId
+const mapStateToProps = (state) => ({
+  offer: getOffer(state),
+  isOfferDataLoaded: getOfferDataLoaded(state),
+  authorizationStatus: getAuthStatus(state),
+  email: getEmail(state),
+  comments: getComments(state),
+  isCommentsLoaded: getCommentsLoaded(state),
+  comment: getComment(state),
+  urlId: getUrlId(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

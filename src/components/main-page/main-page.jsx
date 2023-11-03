@@ -13,6 +13,12 @@ import SortForm from '../sort/sort';
 import Loading from "../loading/loading";
 import {fetchOffersList, checkAuth} from "../../store/action-api";
 
+import {getEmail, getAvatarUrl} from "../../store/auth-data/selectors";
+import {getAuthStatus} from "../../store/auth-check/selectors";
+import {getOffers, getDataLoaded} from "../../store/load-offers/selectors";
+import {getPropertyes} from "../../store/add-propertyes/selectors";
+import {getCityName} from "../../store/city/selectors";
+import {getSortType} from "../../store/sort/selectors";
 
 const MainPage = (props) => {
 
@@ -129,15 +135,15 @@ const MainPage = (props) => {
   );
 };
 
-const mapStateToProps = ({OFFERS, PROPERTYES, CITY, SORT, CHECK_AUTH, AUTH_DATA}) => ({
-  offers: OFFERS.offers,
-  propertyes: PROPERTYES.propertyes,
-  cityName: CITY.cityName,
-  sortType: SORT.sortType,
-  isDataLoaded: OFFERS.isDataLoaded,
-  authorizationStatus: CHECK_AUTH.authorizationStatus,
-  email: AUTH_DATA.email,
-  avatarUrl: AUTH_DATA.avatarUrl,
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
+  isDataLoaded: getDataLoaded(state),
+  propertyes: getPropertyes(state),
+  cityName: getCityName(state),
+  sortType: getSortType(state),
+  authorizationStatus: getAuthStatus(state),
+  email: getEmail(state),
+  avatarUrl: getAvatarUrl(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
