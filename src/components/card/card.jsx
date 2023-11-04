@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from "react";
+import React, {memo} from "react";
 import PropTypes from "prop-types";
 import {CARD_PROP_TYPES, ONE_RATE_STAR_PERCENT} from "../../const/const";
 import {Link} from "react-router-dom";

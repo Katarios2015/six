@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, memo} from 'react';
+import React, {useEffect, useRef} from 'react';
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import "leaflet/dist/leaflet.css";
