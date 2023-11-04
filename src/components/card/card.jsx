@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo, useCallback} from "react";
 import PropTypes from "prop-types";
 import {CARD_PROP_TYPES, ONE_RATE_STAR_PERCENT} from "../../const/const";
 import {Link} from "react-router-dom";
@@ -8,6 +8,7 @@ const Card = (props) => {
   const {item, onMouseOver, onMouseOut, className, classNameWrapper, nearbyFlagCard} = props;
   const {id, isPremium, isFavorite, rating, price, previewImage, title, type} = item;
   const rateWidth = Number(Math.round(rating) * ONE_RATE_STAR_PERCENT);
+
   const handleCardMouseOver = () => {
     onMouseOver(item);
   };
@@ -72,5 +73,5 @@ Card.propTypes = {
 };
 
 
-export default Card;
+export default memo(Card);
 

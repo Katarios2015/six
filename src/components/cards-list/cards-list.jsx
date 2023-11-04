@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {CARD_PROP_TYPES} from '../../const/const';
 import {addPropertyes} from "../../store/action";
 import {connect} from 'react-redux';
-import {useEffect} from 'react';
+import {useEffect, memo} from 'react';
 
 import {getPropertyes} from "../../store/add-propertyes/selectors";
 import {getCityName} from "../../store/city/selectors";
@@ -85,4 +85,4 @@ CardsList.propTypes = {
 };
 
 export {CardsList};
-export default connect(mapStateToProps, mapDispatchToProps)(CardsList);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(CardsList));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import Card from "../card/card";
 import PropTypes from "prop-types";
 
@@ -24,4 +24,4 @@ CardCities.propTypes = {
   classNameWrapper: PropTypes.string.isRequired,
 };
 
-export default CardCities;
+export default memo(CardCities);

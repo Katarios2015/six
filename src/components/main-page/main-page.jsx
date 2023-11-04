@@ -1,18 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import PropTypes from 'prop-types';
 import CardsList from '../cards-list/cards-list';
 import CitiesList from '../cities-list/cities-list';
 import Map from '../map/map';
-// import MainEmpty from "../main-empty/main-empty";
+import MainEmpty from "../main-empty/main-empty";
 import {CARD_PROP_TYPES, APP_ROUTE} from '../../const/const';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import SortForm from '../sort/sort';
 // import {sort, addPropertyes} from "../../store/action";
-
 import Loading from "../loading/loading";
 import {fetchOffersList, checkAuth} from "../../store/action-api";
-
 import {getEmail, getAvatarUrl} from "../../store/auth-data/selectors";
 import {getAuthStatus} from "../../store/auth-check/selectors";
 import {getOffers, getDataLoaded} from "../../store/load-offers/selectors";
@@ -25,14 +23,20 @@ const MainPage = (props) => {
   const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, onLoadData, isAuth} = props;
   const placesCount = propertyes.length;
 
+  const filtredByCityOffers = offers.filter((offer) => offer.city.name === cityName);
+
+  if (cityName === `Amsterdam`) {
+    filtredByCityOffers.length = 0;
+  }
 
   const [activeCard, setActiveCard] = useState(null);
-  const handleCardMouseOver = (item) => {
+  const handleCardMouseOver = useCallback((item) => {
     setActiveCard(item);
-  };
-  const handleCardMouseOut = () => {
+  }, []);
+
+  const handleCardMouseOut = useCallback(() => {
     setActiveCard(null);
-  };
+  }, []);
 
 
   useEffect(() => {
@@ -46,15 +50,16 @@ const MainPage = (props) => {
     }
   }, [isDataLoaded]);
 
-  /* useEffect(() => {
-    if (isDataLoaded && (placesCount === 0)) {
-      mainEmpty();
-    }
-  }, [isDataLoaded, cityName, placesCount]);*/
 
   if (!isDataLoaded) {
     return (
       <Loading />
+    );
+  }
+
+  if (filtredByCityOffers.length === 0) {
+    return (
+      <MainEmpty />
     );
   }
 
@@ -74,22 +79,24 @@ const MainPage = (props) => {
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
-                  {authorizationStatus ?
-                    <li className="header__nav-item user">
-                      <Link to={APP_ROUTE.FAVORITES} className="header__nav-link header__nav-link--profile" >
-                        <div className="header__avatar-wrapper user__avatar-wrapper">
-                        </div>
-                        <span className="header__user-name user__name">{email}
-                        </span>
-                      </Link>
-                    </li> :
-                    <li className="header__nav-item user">
-                      <Link to={APP_ROUTE.LOGIN} className="header__nav-link header__nav-link--profile" href="#">
-                        <div className="header__avatar-wrapper user__avatar-wrapper">
-                        </div>
-                        <span className="header__login">Sign in</span>
-                      </Link>
-                    </li>}
+                  {
+                    authorizationStatus ?
+                      <li className="header__nav-item user">
+                        <Link to={APP_ROUTE.FAVORITES} className="header__nav-link header__nav-link--profile" >
+                          <div className="header__avatar-wrapper user__avatar-wrapper">
+                          </div>
+                          <span className="header__user-name user__name">{email}
+                          </span>
+                        </Link>
+                      </li> :
+                      <li className="header__nav-item user">
+                        <Link to={APP_ROUTE.LOGIN} className="header__nav-link header__nav-link--profile" href="#">
+                          <div className="header__avatar-wrapper user__avatar-wrapper">
+                          </div>
+                          <span className="header__login">Sign in</span>
+                        </Link>
+                      </li>
+                  }
                 </ul>
               </nav>
             </div>

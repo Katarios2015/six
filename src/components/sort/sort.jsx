@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import PropTypes from 'prop-types';
 import {sort} from "../../store/action";
 import {connect} from 'react-redux';
@@ -20,9 +20,9 @@ const SortForm = (props) => {
         {sortList.map((type, index)=> {
           return (
             <li
-              onClick={()=> {
+              onClick={useCallback(()=> {
                 onSort(type);
-              }}
+              }, [sortType])}
               tabndex={0}
               key={index}
               className={type === sortType ? `places__option places__option--active` :
