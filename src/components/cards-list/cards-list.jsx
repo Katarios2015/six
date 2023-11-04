@@ -3,9 +3,15 @@ import CardNearby from "../card-nearby/card-nearby";
 import CardCities from "../card-cities/card-cities";
 import PropTypes from 'prop-types';
 import {CARD_PROP_TYPES} from '../../const/const';
-import {ActionCreator} from "../../store/action";
+import {addPropertyes} from "../../store/action";
 import {connect} from 'react-redux';
-import {useEffect} from 'react';
+import {useEffect, memo} from 'react';
+
+import {getPropertyes} from "../../store/add-propertyes/selectors";
+import {getCityName} from "../../store/city/selectors";
+import {getSortType} from "../../store/sort/selectors";
+import {getOffers} from "../../store/load-offers/selectors";
+
 
 const getCardByNearbyFlag = (flag, offer, handleCardMouseOver, handleCardMouseOut) => {
 
@@ -36,10 +42,10 @@ const getCardByNearbyFlag = (flag, offer, handleCardMouseOver, handleCardMouseOu
 
 
 const CardsList = (props) => {
-  const {offers, nearbyFlag, cityName, propertyes, sortType, addPropertyes, handleCardMouseOver, handleCardMouseOut} = props;
+  const {offers, nearbyFlag, cityName, propertyes, sortType, sortOffers, handleCardMouseOver, handleCardMouseOut} = props;
 
   useEffect(() => {
-    addPropertyes(cityName, offers, sortType);
+    sortOffers(cityName, offers, sortType);
   }, [cityName, sortType]);
 
   return (
@@ -55,15 +61,15 @@ const CardsList = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  propertyes: state.propertyes,
-  cityName: state.cityName,
-  sortType: state.sortType,
-  offers: state.offers,
+  propertyes: getPropertyes(state),
+  cityName: getCityName(state),
+  sortType: getSortType(state),
+  offers: getOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addPropertyes(cityName, offers, sortType) {
-    dispatch(ActionCreator.addPropertyes(cityName, offers, sortType));
+  sortOffers(cityName, offers, sortType) {
+    dispatch(addPropertyes(cityName, offers, sortType));
   },
 });
 
@@ -72,11 +78,11 @@ CardsList.propTypes = {
   offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
   nearbyFlag: PropTypes.bool.isRequired,
   cityName: PropTypes.string.isRequired,
-  addPropertyes: PropTypes.func.isRequired,
+  sortOffers: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
   handleCardMouseOver: PropTypes.func,
   handleCardMouseOut: PropTypes.func,
 };
 
 export {CardsList};
-export default connect(mapStateToProps, mapDispatchToProps)(CardsList);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(CardsList));

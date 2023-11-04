@@ -1,13 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import {CARD_PROP_TYPES} from "../../const/const";
 
 
 const ImagesList = (props) => {
-  const {propertyItems} = props;
-  const {images, type} = propertyItems;
+  const {propertyItem} = props;
+  const {images, type} = propertyItem;
   return (
-    images.map((item, index)=> {
+    images.slice(0, 6).map((item, index)=> {
       return (
         <div key={index} className="property__image-wrapper">
           <img className="property__image" src={item}
@@ -21,7 +21,7 @@ const ImagesList = (props) => {
 };
 
 ImagesList.propTypes = {
-  propertyItems: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired
+  propertyItem: CARD_PROP_TYPES
 };
 
 export default ImagesList;

@@ -1,35 +1,44 @@
-import {ActionCreator} from "./action";
-// import {AuthorizationStatus} from "../const/const";
-import {adaptToClient, adaptToClientReview} from "./middlewares/adapter";
+import {loadOffers, loadFavoriteOffers, loadOffer, redirectToRoute, loadComments, requireAuthorization, authData, addComment} from "./action";
+import {API_ROUTE, APP_ROUTE} from "../const/const";
+import {adaptToClient, adaptToClientReview} from "../utils/adapter";
+
 
 const fetchOffersList = () => (dispatch, _getState, api) => (
-  api.get(`/hotels`)
-    .then(({data}) => dispatch(ActionCreator.loadOffers(data.map(adaptToClient))))
+  api.get(API_ROUTE.HOTELS)
+    .then(({data}) => dispatch(loadOffers(data.map(adaptToClient))))
+);
+
+const fetchFavoritesList = () => (dispatch, _getState, api) => (
+  api.get(API_ROUTE.FAVORITE)
+    .then(({data}) => dispatch(loadFavoriteOffers(data.map(adaptToClient))))
 );
 
 
 const fetchOffer = () => (dispatch, getState, api) => (
-  api.get(`/hotels/${getState().urlId}`)
+  api.get(`${API_ROUTE.HOTELS}/${getState().OFFER_ID.urlId}`)
     .then(({data}) => {
-      dispatch(ActionCreator.loadOffer(adaptToClient(data)));
+      dispatch(loadOffer(adaptToClient(data)));
     })
-    .catch(() => dispatch(ActionCreator.redirectToRoute(`/offer/`)))
+    .catch(() => {
+      dispatch(redirectToRoute(`/offer/`));
+    }
+    )
 );
 
 const fetchComments = () => (dispatch, getState, api) => (
-  api.get(`/comments/${getState().urlId}`)
+  api.get(`${API_ROUTE.COMMENTS}/${getState().urlId}`)
     .then(({data}) => {
-      dispatch(ActionCreator.loadComments(data.map(adaptToClientReview)));
+      dispatch(loadComments(data.map(adaptToClientReview)));
     })
     .catch(() => {})
 );
 
 
 const checkAuth = () => (dispatch, _getState, api) => (
-  api.get(`/login`)
+  api.get(API_ROUTE.LOGIN)
     .then(({data}) => {
-      dispatch(ActionCreator.requireAuthorization(true));
-      dispatch(ActionCreator.authData({
+      dispatch(requireAuthorization(true));
+      dispatch(authData({
         ...data,
         avatarUrl: data[`avatar_url`],
         isPro: data[`is_pro`],
@@ -39,25 +48,25 @@ const checkAuth = () => (dispatch, _getState, api) => (
 );
 
 const login = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.post(`/login`, {email, password})
+  api.post(APP_ROUTE.LOGIN, {email, password})
     .then(({data}) => {
-      dispatch(ActionCreator.requireAuthorization(true));
-      dispatch(ActionCreator.authData({
+      dispatch(requireAuthorization(true));
+      dispatch(authData({
         ...data,
         avatarUrl: data[`avatar_url`],
         isPro: data[`is_pro`],
       }));
     })
-    .then(() => dispatch(ActionCreator.redirectToRoute(`/`)))
+    .then(() => dispatch(redirectToRoute(APP_ROUTE.MAIN)))
 );
 
 const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => (
-  api.post(`/comments/${getState().urlId}`, {comment, rating})
+  api.post(`${APP_ROUTE.COMMENTS}/${getState().urlId}`, {comment, rating})
     .then(({data}) => {
-      dispatch(ActionCreator.addComment(data));
+      dispatch(addComment(data));
     })
     .catch((error) => error)
 );
 
-export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments};
+export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments, fetchFavoritesList};
 

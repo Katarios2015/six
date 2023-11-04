@@ -27,7 +27,8 @@ const getSortedCards = (filtredOffers, sortType) => {
 
 const getFiltredByCityOffers = (cityName, offers, sortType) => {
   const filtredByCityOffers = offers.filter((offer) => offer.city.name === cityName);
-  const filtredPropertyes = getSortedCards(filtredByCityOffers, sortType);
+
+  let filtredPropertyes = getSortedCards(filtredByCityOffers, sortType);
   return filtredPropertyes;
 };
 

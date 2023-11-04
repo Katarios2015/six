@@ -9,24 +9,26 @@ import thunk from "redux-thunk";
 import {applyMiddleware} from "redux";
 import createAPI from "./services/api";
 // import {reviews} from "./mocks/offers";
-import {reducer} from "./store/reducer";
+// import {reducer} from "./store/root-reducer";
 import {cities, SORT_TYPES} from "./const/const";
-import {ActionCreator} from "./store/action";
+import {requireAuthorization} from "./store/action";
 import {checkAuth} from "./store/action-api";
 import {redirect} from "./store/middlewares/redirect";
+import rootReducer from "./store/root-reducer";
+
 
 const api = createAPI(
-    () => store.dispatch(ActionCreator.requireAuthorization(false))
+    () => store.dispatch(requireAuthorization(false))
 );
 
 const store = createStore(
-    reducer,
+    rootReducer,
     composeWithDevTools(
         // Начнём с конфигурирования хранилища. Подключим `redux-thunk` в список
     // middlewares. Аргументом для `thunk` передадим сконфигурированный
     // экземпляр `axios`, чтобы была возможность обратиться к нему из действия
         applyMiddleware(thunk.withExtraArgument(api)),
-        applyMiddleware(redirect)
+        applyMiddleware(redirect),
     )
 );
 

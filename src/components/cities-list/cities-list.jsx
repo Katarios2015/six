@@ -1,19 +1,22 @@
-import React from "react";
+import React, {useCallback} from "react";
 import PropTypes from 'prop-types';
-import {ActionCreator} from "../../store/action";
+import {cityOnChange} from "../../store/action";
 import {connect} from 'react-redux';
+import {getCityName} from "../../store/city/selectors";
 
 const CitiesList = (props) => {
-  const {cities, cityName, cityOnChange} = props;
+  const {cities, cityName, cityOnClick} = props;
+
+
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city, index) => {
         return (
           <li key={index} className="locations__item">
             <a className={city === cityName ? `locations__item-link tabs__item tabs__item--active` : `locations__item-link tabs__item`} href="#"
-              onClick={()=> {
-                cityOnChange(city);
-              }}
+              onClick={useCallback(()=> {
+                cityOnClick(city);
+              }, [cityName])}
             >
               <span>{city}</span>
             </a>
@@ -25,20 +28,19 @@ const CitiesList = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  cityName: state.cityName,
+  cityName: getCityName(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  cityOnChange(city) {
-    dispatch(ActionCreator.cityOnChange(city));
+  cityOnClick(city) {
+    dispatch(cityOnChange(city));
   },
 });
-
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   cityName: PropTypes.string.isRequired,
-  cityOnChange: PropTypes.func.isRequired,
+  cityOnClick: PropTypes.func.isRequired,
 };
 
 export {CitiesList};

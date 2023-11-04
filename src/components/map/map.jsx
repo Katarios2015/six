@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import "leaflet/dist/leaflet.css";
 import {CARD_PROP_TYPES} from "../../const/const";
 import {connect} from 'react-redux';
+import {getPropertyes} from "../../store/add-propertyes/selectors";
 
 let location;
 const getLocation = (array, city) => {
@@ -51,10 +52,12 @@ const Map = (props) => {
         attribution: `© OpenStreetMap contributors © CARTO>`
       })
       .addTo(mapRef.current);
+
     return () => {
       mapRef.current.remove();
     };
   }, [mapRef, mapOffers, cityName]);
+
   useEffect(() => {
     mapOffers.forEach((offer) => {
       const activePin = activeCard ? activeCard.id === offer.id : false;
@@ -79,7 +82,7 @@ const Map = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  mapOffers: state.propertyes,
+  mapOffers: getPropertyes(state),
 });
 
 Map.propTypes = {

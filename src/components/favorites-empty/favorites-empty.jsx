@@ -1,6 +1,12 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {APP_ROUTE} from '../../const/const';
+import {getEmail} from "../../store/auth-data/selectors";
 
-const FavoritesEmpty = () => {
+const FavoritesEmpty = (props) => {
+  const {email} = props;
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -15,9 +21,9 @@ const FavoritesEmpty = () => {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <a className="header__logo-link" href="main.html">
+                <Link to={APP_ROUTE.MAIN} className="header__logo-link">
                   <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-                </a>
+                </Link>
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
@@ -25,7 +31,7 @@ const FavoritesEmpty = () => {
                     <a className="header__nav-link header__nav-link--profile" href="#">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                      <span className="header__user-name user__name">{email}</span>
                     </a>
                   </li>
                 </ul>
@@ -45,13 +51,22 @@ const FavoritesEmpty = () => {
           </div>
         </main>
         <footer className="footer">
-          <a className="footer__logo-link" href="main.html">
+          <Link to={APP_ROUTE.MAIN} className="footer__logo-link">
             <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width={64} height={33} />
-          </a>
+          </Link>
         </footer>
       </div>
     </React.Fragment>
   );
 };
 
-export default FavoritesEmpty;
+const mapStateToProps = (state) => ({
+  email: getEmail(state),
+});
+
+FavoritesEmpty.propTypes = {
+  email: PropTypes.string,
+};
+
+export {FavoritesEmpty};
+export default connect(mapStateToProps, null)(FavoritesEmpty);

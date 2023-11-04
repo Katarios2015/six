@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useCallback} from "react";
 import PropTypes from 'prop-types';
-import {ActionCreator} from "../../store/action";
+import {sort} from "../../store/action";
 import {connect} from 'react-redux';
 import {CARD_PROP_TYPES} from '../../const/const';
+import {getSortType} from "../../store/sort/selectors";
 
 const SortForm = (props) => {
-  const {sortType, sortList, sort} = props;
+  const {sortType, sortList, onSort} = props;
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -19,9 +20,9 @@ const SortForm = (props) => {
         {sortList.map((type, index)=> {
           return (
             <li
-              onClick={()=> {
-                sort(type);
-              }}
+              onClick={useCallback(()=> {
+                onSort(type);
+              }, [sortType])}
               tabndex={0}
               key={index}
               className={type === sortType ? `places__option places__option--active` :
@@ -36,12 +37,12 @@ const SortForm = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  sortType: state.sortType,
+  sortType: getSortType(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  sort(sortType) {
-    dispatch(ActionCreator.sort(sortType));
+  onSort(sortType) {
+    dispatch(sort(sortType));
   },
 });
 
@@ -49,7 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
 SortForm.propTypes = {
   sortList: PropTypes.arrayOf(PropTypes.string).isRequired,
   sortType: PropTypes.string.isRequired,
-  sort: PropTypes.func.isRequired,
+  onSort: PropTypes.func.isRequired,
   propertyes: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
 };
 

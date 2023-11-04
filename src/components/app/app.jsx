@@ -6,7 +6,7 @@ import Favorities from "../favorites/favorites";
 import Login from "../login/login";
 import NotFound from "../not-found/not-found";
 import Property from "../property/property";
-// import {REVIEW_PROP_TYPES} from '../../const/const';
+import {APP_ROUTE} from '../../const/const';
 import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
 /* Компонент `BrowserRouter` автоматически создаёт объект для работы с
@@ -30,15 +30,15 @@ const App = (props) => {
         <Route exact path="/">
           <MainPage cities={cities} sortList={sortList}/>
         </Route>
-        <Route exact path="/login">
+        <Route exact path={APP_ROUTE.LOGIN}>
           <Login/>
         </Route>
         <PrivateRoute exact
-          path="/favorites"
+          path={APP_ROUTE.FAVORITES}
           render={() => <Favorities />}
         >
         </PrivateRoute>
-        <Route exact path="/offer/:id">
+        <Route exact path={APP_ROUTE.OFFER_ID}>
           <Property
             nearby={true}/>
         </Route>

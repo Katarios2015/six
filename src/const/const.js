@@ -65,5 +65,19 @@ const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
+const APP_ROUTE = {
+  MAIN: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER_ID: `/offer/:id`,
+  COMMENTS: `/comments`
+};
 
-export {CARD_PROP_TYPES, REVIEW_PROP_TYPES, DEFAULT_CITY, cities, SORT_TYPES, ONE_RATE_STAR_PERCENT, AuthorizationStatus};
+const API_ROUTE = {
+  LOGIN: `/login`,
+  HOTELS: `/hotels`,
+  FAVORITE: `/favorite`,
+  COMMENTS: `/comments`
+};
+
+export {CARD_PROP_TYPES, REVIEW_PROP_TYPES, DEFAULT_CITY, cities, SORT_TYPES, ONE_RATE_STAR_PERCENT, AuthorizationStatus, API_ROUTE, APP_ROUTE};

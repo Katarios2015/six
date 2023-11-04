@@ -1,11 +1,12 @@
 import React from "react";
 // import PropTypes from 'prop-types';
-import {CARD_PROP_TYPES} from "../../const/const";
+import {CARD_PROP_TYPES, ONE_RATE_STAR_PERCENT} from "../../const/const";
 
 
 const FavoriteCard = (props) => {
   const {favoriteItem} = props;
-  const {isPremium, price, images, title, type} = favoriteItem;
+  const {isPremium, price, images, title, type, rating} = favoriteItem;
+  const rateWidth = Number(Math.round(rating) * ONE_RATE_STAR_PERCENT);
   return (
     <article className="favorites__card place-card">
       <div className={isPremium ? `place-card__mark` : ``}>
@@ -31,7 +32,7 @@ const FavoriteCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `100%`}} />
+            <span style={{width: `${rateWidth}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
