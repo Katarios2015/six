@@ -10,9 +10,9 @@ import ReviewesList from "../reviewes-list/reviewes-list";
 import ImagesList from "../property-images-list/property-images-list";
 // import {Map} from '../map/map';
 // import CardsList from '../cards-list/cards-list';
-import {fetchOffer, fetchComments, checkAuth} from "../../store/action-api";
+import {fetchOffer, fetchComments, checkAuth, addFavorite} from "../../store/action-api";
 import Loading from "../loading/loading";
-import {getOfferId, addComment} from "../../store/action";
+import {getOfferId, addComment, changeFavoriteStatus, redirectToRoute} from "../../store/action";
 
 import {getEmail} from "../../store/auth-data/selectors";
 import {getAuthStatus} from "../../store/auth-check/selectors";
@@ -21,11 +21,14 @@ import {getOffer, getOfferDataLoaded} from "../../store/load-property/selectors"
 import {getComments, getCommentsLoaded} from "../../store/load-comments/selectors";
 
 import {getUrlId} from "../../store/offer-id/selectors";
+import {getFavoriteStatus} from "../../store/add-favorite-status/selectors";
+// import {getStatus} from "../../utils/favorite-status";
 
 const Property = (props) => {
-  const {offer, comments, authorizationStatus, isOfferDataLoaded, offerId, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, comment} = props;
+  const {offer, comments, authorizationStatus, isOfferDataLoaded, offerId, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, comment, bookMarkOnClick, redirect} = props;
 
-  const {bedrooms, description, goods, host, isPremium, maxAdults, price, rating, title, type} = offer;
+  const {bedrooms, description, goods, host, isPremium, isFavorite,
+    maxAdults, price, rating, title, type} = offer;
 
   const rateWidth = Number(Math.round(rating) * ONE_RATE_STAR_PERCENT);
   const urlParams = useParams();
@@ -53,6 +56,7 @@ const Property = (props) => {
       <Loading />
     );
   }
+
 
   return (
     <div className="page">
@@ -102,7 +106,20 @@ const Property = (props) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button onClick={() => {
+                  if (authorizationStatus) {
+                    let status = 0;
+                    if (isFavorite) {
+                      status = 0;
+                    } else {
+                      status = 1;
+                    }
+                    bookMarkOnClick(status, urlId);
+                  } else {
+                    redirect();
+                  }
+                }}
+                className="property__bookmark-button button" type="button">
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -191,7 +208,8 @@ const mapStateToProps = (state) => ({
   comments: getComments(state),
   isCommentsLoaded: getCommentsLoaded(state),
   comment: getComment(state),
-  urlId: getUrlId(state)
+  urlId: getUrlId(state),
+  status: getFavoriteStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -209,6 +227,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addComment(comment) {
     dispatch(addComment(comment));
+  },
+  bookMarkOnClick(toggle, urlId) {
+    dispatch(changeFavoriteStatus(toggle));
+    dispatch(addFavorite(urlId, toggle));
+  },
+  redirect() {
+    dispatch(redirectToRoute(APP_ROUTE.LOGIN));
   }
 });
 
@@ -226,6 +251,9 @@ Property.propTypes = {
   addComment: PropTypes.func.isRequired,
   comment: PropTypes.obj,
   offerId: PropTypes.func.isRequired,
+  status: PropTypes.number.isRequired,
+  bookMarkOnClick: PropTypes.func.isRequired,
+  redirect: PropTypes.func.isRequired
 };
 
 export {Property};

@@ -1,4 +1,5 @@
 import {getFiltredByCityOffers} from "../../src/utils/filter";
+import {getStatus} from "../../src/utils/favorite-status";
 
 const ActionType = {
   CITY_ON_CHANGE: `city/CITY_ON_CHANGE`,
@@ -13,6 +14,7 @@ const ActionType = {
   AUTHORIZATION_DATA: `user/authData`,
   REDIRECT_TO_ROUTE: `main/redirectToRoute`,
   ADD_COMMENT: `offer/addComment`,
+  CHANGE_STATUS: `offer/changeFavoriteStatus`,
 };
 
 const cityOnChange = (cityName) => ({
@@ -74,6 +76,10 @@ const addComment = (comment)=>({
   payload: comment,
 });
 
+const changeFavoriteStatus = (status) =>({
+  type: ActionType.CHANGE_STATUS,
+  payload: status,
+});
 
 export {ActionType,
   cityOnChange,
@@ -87,4 +93,5 @@ export {ActionType,
   requireAuthorization,
   redirectToRoute,
   authData,
-  addComment};
+  addComment,
+  changeFavoriteStatus};

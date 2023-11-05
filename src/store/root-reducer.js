@@ -10,6 +10,7 @@ import {addCommentReducer} from "./add-comment/add-comment";
 import {loadCommentsReducer} from "./load-comments/load-comments";
 import {loadOffersReducer} from "./load-offers/load-offers";
 
+import {addFavoriteStatus} from "./add-favorite-status/add-favorite-status";
 import {sorting} from "./sort/sort";
 import {offerId} from "./offer-id/offer-id";
 import {loadProperty} from "./load-property/load-property";
@@ -25,7 +26,8 @@ const NameSpace = {
   COMMENTS: `COMMENTS`,
   SORT: `SORT`,
   PROPERTY: `PROPERTY`,
-  OFFER_ID: `OFFER_ID`
+  OFFER_ID: `OFFER_ID`,
+  STATUS: `STATUS`,
 };
 
 export {NameSpace};
@@ -42,4 +44,5 @@ export default combineReducers({
   [NameSpace.SORT]: sorting,
   [NameSpace.OFFER_ID]: offerId,
   [NameSpace.PROPERTY]: loadProperty,
+  [NameSpace.STATUS]: addFavoriteStatus,
 });

@@ -1,4 +1,4 @@
-import {loadOffers, loadFavoriteOffers, loadOffer, redirectToRoute, loadComments, requireAuthorization, authData, addComment} from "./action";
+import {loadOffers, loadFavoriteOffers, loadOffer, redirectToRoute, loadComments, requireAuthorization, authData, addComment, changeFavoriteStatus} from "./action";
 import {API_ROUTE, APP_ROUTE} from "../const/const";
 import {adaptToClient, adaptToClientReview} from "../utils/adapter";
 
@@ -26,7 +26,7 @@ const fetchOffer = () => (dispatch, getState, api) => (
 );
 
 const fetchComments = () => (dispatch, getState, api) => (
-  api.get(`${API_ROUTE.COMMENTS}/${getState().urlId}`)
+  api.get(`${API_ROUTE.COMMENTS}/${getState().OFFER_ID.urlId}`)
     .then(({data}) => {
       dispatch(loadComments(data.map(adaptToClientReview)));
     })
@@ -61,12 +61,20 @@ const login = ({login: email, password}) => (dispatch, _getState, api) => (
 );
 
 const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => (
-  api.post(`${APP_ROUTE.COMMENTS}/${getState().urlId}`, {comment, rating})
+  api.post(`${APP_ROUTE.COMMENTS}/${getState().OFFER_ID.urlId}`, {comment, rating})
     .then(({data}) => {
       dispatch(addComment(data));
     })
     .catch((error) => error)
 );
 
-export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments, fetchFavoritesList};
+const addFavorite = ({urlId, status}) => (dispatch, getState, api) => (
+  api.post(`favorite/${getState().OFFER_ID.urlId}/${getState().STATUS.status}`, {urlId, status})
+    .then(({data}) => {
+      dispatch(changeFavoriteStatus(data));
+    })
+    .catch((error) => error)
+);
+
+export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments, fetchFavoritesList, addFavorite};
 
