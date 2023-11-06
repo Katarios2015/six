@@ -1,4 +1,4 @@
-import {loadOffers, loadFavoriteOffers, loadOffer, redirectToRoute, loadComments, requireAuthorization, authData, addComment, changeFavoriteStatus} from "./action";
+import {loadOffers, loadFavoriteOffers, loadOffer, redirectToRoute, loadComments, requireAuthorization, authData, addComment, isFavoriteStatus} from "./action";
 import {API_ROUTE, APP_ROUTE} from "../const/const";
 import {adaptToClient, adaptToClientReview} from "../utils/adapter";
 
@@ -63,7 +63,6 @@ const login = ({login: email, password}) => (dispatch, _getState, api) => (
 const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => (
   api.post(`${APP_ROUTE.COMMENTS}/${getState().OFFER_ID.urlId}`, {comment, rating})
     .then(({data}) => {
-      console.log(data);
       dispatch(addComment({
         ...data,
         comment: data[`comment`],
@@ -78,8 +77,7 @@ const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => 
 const addFavorite = ({urlId, status}) => (dispatch, getState, api) => (
   api.post(`favorite/${getState().OFFER_ID.urlId}/${getState().STATUS.status}`, {urlId, status})
     .then(({data}) => {
-      console.log(data);
-      dispatch(changeFavoriteStatus(data));
+      dispatch(loadOffer(adaptToClient(data)));
     })
     .catch((error) => console.log(`Ошибка ` + error))
 );

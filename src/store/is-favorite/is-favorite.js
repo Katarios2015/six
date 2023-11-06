@@ -1,15 +1,15 @@
 import {ActionType} from "../action";
 
 const initialState = {
-  status: 0,
+  isFavorite: false
 };
 
-const addFavoriteStatus = (state = initialState, action) => {
+const isFavoriteStatus = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_STATUS: {
+    case ActionType.IS_FAVORITE_STATUS: {
       return {
         ...state,
-        status: action.payload,
+        isFavorite: action.payload,
       };
     }
     default: {
@@ -18,4 +18,4 @@ const addFavoriteStatus = (state = initialState, action) => {
   }
 };
 
-export {addFavoriteStatus};
+export {isFavoriteStatus};

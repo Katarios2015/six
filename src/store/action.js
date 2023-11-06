@@ -14,6 +14,7 @@ const ActionType = {
   REDIRECT_TO_ROUTE: `main/redirectToRoute`,
   ADD_COMMENT: `offer/addComment`,
   CHANGE_STATUS: `offer/changeFavoriteStatus`,
+  IS_FAVORITE_STATUS: `offer/isFavoriteStatus`
 };
 
 const cityOnChange = (cityName) => ({
@@ -75,9 +76,14 @@ const addComment = (comment)=>({
   payload: comment,
 });
 
-const changeFavoriteStatus = (status) =>({
+const changeFavoriteStatus = (data) =>({
   type: ActionType.CHANGE_STATUS,
-  payload: status,
+  payload: data,
+});
+
+const isFavoriteStatus = (data) =>({
+  type: ActionType.IS_FAVORITE_STATUS,
+  payload: data,
 });
 
 export {ActionType,
@@ -93,4 +99,5 @@ export {ActionType,
   redirectToRoute,
   authData,
   addComment,
-  changeFavoriteStatus};
+  changeFavoriteStatus,
+  isFavoriteStatus};

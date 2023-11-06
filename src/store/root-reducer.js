@@ -14,6 +14,7 @@ import {addFavoriteStatus} from "./add-favorite-status/add-favorite-status";
 import {sorting} from "./sort/sort";
 import {offerId} from "./offer-id/offer-id";
 import {loadProperty} from "./load-property/load-property";
+import {isFavoriteStatus} from "./is-favorite/is-favorite";
 
 const NameSpace = {
   OFFERS: `OFFERS`,
@@ -28,6 +29,7 @@ const NameSpace = {
   PROPERTY: `PROPERTY`,
   OFFER_ID: `OFFER_ID`,
   STATUS: `STATUS`,
+  IS_FAVORITE: `IS_FAVORITE`,
 };
 
 export {NameSpace};
@@ -45,4 +47,5 @@ export default combineReducers({
   [NameSpace.OFFER_ID]: offerId,
   [NameSpace.PROPERTY]: loadProperty,
   [NameSpace.STATUS]: addFavoriteStatus,
+  [NameSpace.IS_FAVORITE]: isFavoriteStatus,
 });

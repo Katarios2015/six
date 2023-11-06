@@ -120,7 +120,8 @@ const Property = (props) => {
                     redirect();
                   }
                 }}
-                className="property__bookmark-button button" type="button">
+                className={isFavorite ? `property__bookmark-button button property__bookmark-button--active` : `property__bookmark-button button`
+                } type="button">
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -210,7 +211,7 @@ const mapStateToProps = (state) => ({
   isCommentsLoaded: getCommentsLoaded(state),
   comment: getComment(state),
   urlId: getUrlId(state),
-  status: getFavoriteStatus(state)
+  //status: getFavoriteStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -252,7 +253,7 @@ Property.propTypes = {
   addComment: PropTypes.func.isRequired,
   comment: PropTypes.object,
   offerId: PropTypes.func.isRequired,
-  status: PropTypes.number.isRequired,
+  //status: PropTypes.number.isRequired,
   bookMarkOnClick: PropTypes.func.isRequired,
   redirect: PropTypes.func.isRequired
 };
