@@ -1,4 +1,4 @@
-import {loadOffers, loadFavoriteOffers, loadOffer, redirectToRoute, loadComments, requireAuthorization, authData, addComment, isFavoriteStatus} from "./action";
+import {loadOffers, loadFavoriteOffers, loadOffer, redirectToRoute, loadComments, requireAuthorization, authData, addComment} from "./action";
 import {API_ROUTE, APP_ROUTE} from "../const/const";
 import {adaptToClient, adaptToClientReview} from "../utils/adapter";
 
@@ -82,5 +82,13 @@ const addFavorite = ({urlId, status}) => (dispatch, getState, api) => (
     .catch((error) => console.log(`Ошибка ` + error))
 );
 
-export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments, fetchFavoritesList, addFavorite};
+const addFavoriteOnMain = ({status}) => (dispatch, getState, api) => (
+  api.post(`favorite/${getState().OFFER_ID.urlId}/${getState().STATUS.status}`, {status})
+    .then(({data}) => {
+      dispatch(loadOffer(adaptToClient(data)));
+    })
+    .catch((error) => console.log(`Ошибка ` + error))
+);
+
+export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments, fetchFavoritesList, addFavorite, addFavoriteOnMain};
 

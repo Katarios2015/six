@@ -21,8 +21,7 @@ import {getOffer, getOfferDataLoaded} from "../../store/load-property/selectors"
 import {getComments, getCommentsLoaded} from "../../store/load-comments/selectors";
 
 import {getUrlId} from "../../store/offer-id/selectors";
-import {getFavoriteStatus} from "../../store/add-favorite-status/selectors";
-// import {getStatus} from "../../utils/favorite-status";
+
 
 const Property = (props) => {
   const {offer, comments, authorizationStatus, isOfferDataLoaded, offerId, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, comment, bookMarkOnClick, redirect} = props;
@@ -56,7 +55,6 @@ const Property = (props) => {
       <Loading />
     );
   }
-
 
   return (
     <div className="page">
@@ -114,7 +112,6 @@ const Property = (props) => {
                     } else {
                       status = 1;
                     }
-                    console.log(status);
                     bookMarkOnClick(status, urlId);
                   } else {
                     redirect();
@@ -211,7 +208,6 @@ const mapStateToProps = (state) => ({
   isCommentsLoaded: getCommentsLoaded(state),
   comment: getComment(state),
   urlId: getUrlId(state),
-  //status: getFavoriteStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -253,7 +249,6 @@ Property.propTypes = {
   addComment: PropTypes.func.isRequired,
   comment: PropTypes.object,
   offerId: PropTypes.func.isRequired,
-  //status: PropTypes.number.isRequired,
   bookMarkOnClick: PropTypes.func.isRequired,
   redirect: PropTypes.func.isRequired
 };
