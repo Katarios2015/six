@@ -114,6 +114,7 @@ const Property = (props) => {
                     } else {
                       status = 1;
                     }
+                    console.log(status);
                     bookMarkOnClick(status, urlId);
                   } else {
                     redirect();
@@ -228,9 +229,9 @@ const mapDispatchToProps = (dispatch) => ({
   addComment(comment) {
     dispatch(addComment(comment));
   },
-  bookMarkOnClick(toggle, urlId) {
-    dispatch(changeFavoriteStatus(toggle));
-    dispatch(addFavorite(urlId, toggle));
+  bookMarkOnClick(status, urlId) {
+    dispatch(changeFavoriteStatus(status));
+    dispatch(addFavorite(urlId, status));
   },
   redirect() {
     dispatch(redirectToRoute(APP_ROUTE.LOGIN));

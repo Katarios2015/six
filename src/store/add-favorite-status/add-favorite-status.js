@@ -10,6 +10,7 @@ const addFavoriteStatus = (state = initialState, action) => {
       return {
         ...state,
         status: action.payload,
+        isFavorite: action.payload
       };
     }
     default: {

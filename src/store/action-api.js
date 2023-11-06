@@ -63,7 +63,8 @@ const login = ({login: email, password}) => (dispatch, _getState, api) => (
 const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => (
   api.post(`${APP_ROUTE.COMMENTS}/${getState().OFFER_ID.urlId}`, {comment, rating})
     .then(({data}) => {
-      dispatch(addComment(data));
+      console.log(data);
+      dispatch(addComment());
     })
     .catch((error) => error)
 );
@@ -71,6 +72,7 @@ const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => 
 const addFavorite = ({urlId, status}) => (dispatch, getState, api) => (
   api.post(`favorite/${getState().OFFER_ID.urlId}/${getState().STATUS.status}`, {urlId, status})
     .then(({data}) => {
+      console.log(data);
       dispatch(changeFavoriteStatus(data));
     })
     .catch((error) => error)

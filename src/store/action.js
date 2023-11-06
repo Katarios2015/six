@@ -1,5 +1,4 @@
 import {getFiltredByCityOffers} from "../../src/utils/filter";
-import {getStatus} from "../../src/utils/favorite-status";
 
 const ActionType = {
   CITY_ON_CHANGE: `city/CITY_ON_CHANGE`,
