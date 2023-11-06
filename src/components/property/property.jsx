@@ -250,7 +250,7 @@ Property.propTypes = {
   authorizationStatus: PropTypes.bool.isRequired,
   email: PropTypes.string,
   addComment: PropTypes.func.isRequired,
-  comment: PropTypes.obj,
+  comment: PropTypes.object,
   offerId: PropTypes.func.isRequired,
   status: PropTypes.number.isRequired,
   bookMarkOnClick: PropTypes.func.isRequired,

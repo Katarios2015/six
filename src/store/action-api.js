@@ -64,9 +64,15 @@ const reviewPost = ({comment: comment, rating}) => (dispatch, getState, api) => 
   api.post(`${APP_ROUTE.COMMENTS}/${getState().OFFER_ID.urlId}`, {comment, rating})
     .then(({data}) => {
       console.log(data);
-      dispatch(addComment());
+      dispatch(addComment({
+        ...data,
+        comment: data[`comment`],
+        name: data[`name`],
+        avatarUrl: data[`avatar_url`],
+        isPro: data[`is_pro`],
+      }));
     })
-    .catch((error) => error)
+    .catch((error) => console.log(`Ошибка ` + error))
 );
 
 const addFavorite = ({urlId, status}) => (dispatch, getState, api) => (
@@ -75,7 +81,7 @@ const addFavorite = ({urlId, status}) => (dispatch, getState, api) => (
       console.log(data);
       dispatch(changeFavoriteStatus(data));
     })
-    .catch((error) => error)
+    .catch((error) => console.log(`Ошибка ` + error))
 );
 
 export {fetchOffersList, fetchOffer, checkAuth, login, reviewPost, fetchComments, fetchFavoritesList, addFavorite};
