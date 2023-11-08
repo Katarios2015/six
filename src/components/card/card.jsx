@@ -1,5 +1,4 @@
 import React, {memo} from "react";
-import {useEffect} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 import {CARD_PROP_TYPES, ONE_RATE_STAR_PERCENT, APP_ROUTE} from "../../const/const";
@@ -8,16 +7,10 @@ import {getAuthStatus} from "../../store/auth-check/selectors";
 import {checkAuth, addFavoriteOnMain} from "../../store/action-api";
 import {changeFavoriteStatus, redirectToRoute, getOfferId} from "../../store/action";
 
-import {getUrlId} from "../../store/offer-id/selectors";
-
 const Card = (props) => {
-  const {item, onMouseOver, onMouseOut, className, classNameWrapper, nearbyFlagCard, bookMarkOnClick, isAuth, authorizationStatus, redirect, offerId} = props;
+  const {item, onMouseOver, onMouseOut, onChangeFavorite, className, classNameWrapper, nearbyFlagCard} = props;
   const {id, isPremium, isFavorite, rating, price, previewImage, title, type} = item;
   const rateWidth = Number(Math.round(rating) * ONE_RATE_STAR_PERCENT);
-
-  useEffect(() => {
-    isAuth();
-  }, []);
 
   const handleCardMouseOver = () => {
     onMouseOver(item);
@@ -48,20 +41,7 @@ const Card = (props) => {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            onClick={() => {
-              if (authorizationStatus) {
-                let status = 0;
-                if (isFavorite) {
-                  status = 0;
-                } else {
-                  status = 1;
-                }
-                offerId(id);
-                bookMarkOnClick(status);
-              } else {
-                redirect();
-              }
-            }}
+            onClick={(_evt) => {onChangeFavorite(id); console.log(id)}}
             className={isFavorite ? `place-card__bookmark-button place-card__bookmark-button--active button` : `place-card__bookmark-button button`}type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
@@ -112,6 +92,7 @@ Card.propTypes = {
   item: CARD_PROP_TYPES.isRequired,
   onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func,
+  onChangeFavorite: PropTypes.func,
   nearbyFlagCard: PropTypes.bool.isRequired,
   className: PropTypes.string.isRequired,
   classNameWrapper: PropTypes.string.isRequired,

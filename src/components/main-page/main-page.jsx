@@ -8,7 +8,6 @@ import {CARD_PROP_TYPES, APP_ROUTE} from '../../const/const';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import SortForm from '../sort/sort';
-// import {sort, addPropertyes} from "../../store/action";
 import Loading from "../loading/loading";
 import {fetchOffersList, checkAuth} from "../../store/action-api";
 import {getEmail, getAvatarUrl} from "../../store/auth-data/selectors";
@@ -17,12 +16,15 @@ import {getOffers, getDataLoaded} from "../../store/load-offers/selectors";
 import {getPropertyes} from "../../store/add-propertyes/selectors";
 import {getCityName} from "../../store/city/selectors";
 import {getSortType} from "../../store/sort/selectors";
+import {getItem} from "../../store/update-property/selectors";
+
+import {addPropertyes} from "../../store/action";
 
 const MainPage = (props) => {
 
-  const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, onLoadData, isAuth} = props;
-  const placesCount = propertyes.length;
+  const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, onLoadData, loadPropertyes, isAuth, item} = props;
 
+  const placesCount = propertyes.length;
   const filtredByCityOffers = offers.filter((offer) => offer.city.name === cityName);
 
   if (cityName === `Amsterdam`) {
@@ -30,8 +32,8 @@ const MainPage = (props) => {
   }
 
   const [activeCard, setActiveCard] = useState(null);
-  const handleCardMouseOver = useCallback((item) => {
-    setActiveCard(item);
+  const handleCardMouseOver = useCallback((card) => {
+    setActiveCard(card);
   }, []);
 
   const handleCardMouseOut = useCallback(() => {
@@ -50,6 +52,9 @@ const MainPage = (props) => {
     }
   }, [isDataLoaded]);
 
+  useEffect(() => {
+    onLoadData();
+  }, [item]);
 
   if (!isDataLoaded) {
     return (
@@ -151,6 +156,7 @@ const mapStateToProps = (state) => ({
   authorizationStatus: getAuthStatus(state),
   email: getEmail(state),
   avatarUrl: getAvatarUrl(state),
+  item: getItem(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -176,6 +182,7 @@ MainPage.propTypes = {
   authorizationStatus: PropTypes.bool.isRequired,
   email: PropTypes.string,
   avatarUrl: PropTypes.string,
+  item: PropTypes.object,
 };
 
 
