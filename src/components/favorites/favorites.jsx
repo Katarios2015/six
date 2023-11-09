@@ -9,15 +9,20 @@ import Loading from "../loading/loading";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 
 import {getEmail} from "../../store/auth-data/selectors";
+import {getOffers} from "../../store/load-offers/selectors";
 import {getFavoriteOffers, getFavoriteDataLoaded} from "../../store/load-favorite-offers/selectors";
 
 const Favorites = (props) => {
-  const {favoriteOffers, isFavoriteDataLoaded, onFavoriteLoadData, email} = props;
+  const {offers, favoriteOffers, isFavoriteDataLoaded, onFavoriteLoadData, email} = props;
   useEffect(() => {
     if (!isFavoriteDataLoaded) {
       onFavoriteLoadData();
     }
   }, [isFavoriteDataLoaded]);
+
+  useEffect(() => {
+    onFavoriteLoadData();
+  }, [offers]);
 
   if (!isFavoriteDataLoaded) {
     return (
@@ -75,6 +80,7 @@ const mapStateToProps = (state) => ({
   favoriteOffers: getFavoriteOffers(state),
   isFavoriteDataLoaded: getFavoriteDataLoaded(state),
   email: getEmail(state),
+  offers: getOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -88,6 +94,7 @@ Favorites.propTypes = {
   isFavoriteDataLoaded: PropTypes.bool.isRequired,
   onFavoriteLoadData: PropTypes.func.isRequired,
   email: PropTypes.string,
+  offers: PropTypes.arrayOf(CARD_PROP_TYPES).isRequired,
 };
 
 export {Favorites};

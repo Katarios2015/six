@@ -12,9 +12,7 @@ import {getAuthStatus} from "../../store/auth-check/selectors";
 import {getPropertyes} from "../../store/add-propertyes/selectors";
 import {getCityName} from "../../store/city/selectors";
 import {getSortType} from "../../store/sort/selectors";
-import {getOffers, getDataLoaded} from "../../store/load-offers/selectors";
-import {getItem} from "../../store/update-property/selectors";
-
+import {getOffers} from "../../store/load-offers/selectors";
 
 const getCardByNearbyFlag = (flag, offer, handleCardMouseOver, handleCardMouseOut, handleBookmarkClick) => {
 
@@ -46,7 +44,7 @@ const getCardByNearbyFlag = (flag, offer, handleCardMouseOver, handleCardMouseOu
 
 
 const CardsList = (props) => {
-  const {offers, nearbyFlag, cityName, propertyes, sortType, sortOffers, handleCardMouseOver, handleCardMouseOut, authorizationStatus, isAuth, changeFavoriteOnMain, redirect, item} = props;
+  const {offers, nearbyFlag, cityName, propertyes, sortType, sortOffers, handleCardMouseOver, handleCardMouseOut, authorizationStatus, isAuth, changeFavoriteOnMain, redirect} = props;
 
   const handleBookmarkClick = useCallback((id) => {
     if (authorizationStatus) {
@@ -83,8 +81,6 @@ const mapStateToProps = (state) => ({
   sortType: getSortType(state),
   offers: getOffers(state),
   authorizationStatus: getAuthStatus(state),
-  item: getItem(state),
-  isDataLoaded: getDataLoaded(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -115,8 +111,6 @@ CardsList.propTypes = {
   isAuth: PropTypes.func,
   redirect: PropTypes.func.isRequired,
   changeFavoriteOnMain: PropTypes.func,
-  item: PropTypes.object,
-  isDataLoaded: PropTypes.bool.isRequired,
 };
 
 export {CardsList};

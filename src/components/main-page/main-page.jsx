@@ -18,11 +18,9 @@ import {getCityName} from "../../store/city/selectors";
 import {getSortType} from "../../store/sort/selectors";
 import {getItem} from "../../store/update-property/selectors";
 
-import {addPropertyes} from "../../store/action";
-
 const MainPage = (props) => {
 
-  const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, onLoadData, loadPropertyes, isAuth, item} = props;
+  const {offers, propertyes, cities, cityName, sortList, sortType, authorizationStatus, isDataLoaded, email, onLoadData, isAuth, item} = props;
 
   const placesCount = propertyes.length;
   const filtredByCityOffers = offers.filter((offer) => offer.city.name === cityName);
