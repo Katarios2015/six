@@ -13,6 +13,8 @@ const ActionType = {
   AUTHORIZATION_DATA: `user/authData`,
   REDIRECT_TO_ROUTE: `main/redirectToRoute`,
   ADD_COMMENT: `offer/addComment`,
+  CHANGE_STATUS: `offer/changeFavoriteStatus`,
+  UPDATE_OFFER: `offer/updateOffer`
 };
 
 const cityOnChange = (cityName) => ({
@@ -74,6 +76,15 @@ const addComment = (comment)=>({
   payload: comment,
 });
 
+const changeFavoriteStatus = (data) =>({
+  type: ActionType.CHANGE_STATUS,
+  payload: data,
+});
+
+const updatedOffer = (data) =>({
+  type: ActionType.UPDATE_OFFER,
+  payload: data,
+});
 
 export {ActionType,
   cityOnChange,
@@ -87,4 +98,6 @@ export {ActionType,
   requireAuthorization,
   redirectToRoute,
   authData,
-  addComment};
+  addComment,
+  changeFavoriteStatus,
+  updatedOffer};

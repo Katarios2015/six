@@ -1,17 +1,16 @@
 import {ActionType} from "../action";
 
 const initialState = {
-  offer: {},
-  isOfferDataLoaded: false,
+  item: {}
 };
 
-const loadProperty = (state = initialState, action) => {
+const updatedOffer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_OFFER: {
+    case ActionType.UPDATE_OFFER: {
       return {
         ...state,
-        offer: action.payload,
-        isOfferDataLoaded: true,
+        item: action.payload,
+        id: action.payload.id,
         isFavorite: action.payload.isFavorite,
       };
     }
@@ -21,4 +20,4 @@ const loadProperty = (state = initialState, action) => {
   }
 };
 
-export {loadProperty};
+export {updatedOffer};

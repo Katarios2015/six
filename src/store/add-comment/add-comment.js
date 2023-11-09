@@ -11,7 +11,7 @@ const addCommentReducer = (state = initialState, action) => {
         ...state,
         comment: action.payload,
         name: action.payload.name,
-        avatarUrl: action.payload.user.avatarUrl,
+        avatarUrl: action.payload.avatarUrl,
         isPro: action.payload.isPro,
       };
     }

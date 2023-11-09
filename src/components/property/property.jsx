@@ -10,22 +10,24 @@ import ReviewesList from "../reviewes-list/reviewes-list";
 import ImagesList from "../property-images-list/property-images-list";
 // import {Map} from '../map/map';
 // import CardsList from '../cards-list/cards-list';
-import {fetchOffer, fetchComments, checkAuth} from "../../store/action-api";
+import {fetchOffer, fetchComments, checkAuth, addFavorite} from "../../store/action-api";
 import Loading from "../loading/loading";
-import {getOfferId, addComment} from "../../store/action";
+import {getOfferId, addComment, updatedOffer, redirectToRoute} from "../../store/action";
 
 import {getEmail} from "../../store/auth-data/selectors";
 import {getAuthStatus} from "../../store/auth-check/selectors";
 import {getComment} from "../../store/add-comment/selectors";
 import {getOffer, getOfferDataLoaded} from "../../store/load-property/selectors";
 import {getComments, getCommentsLoaded} from "../../store/load-comments/selectors";
-
+import {getItem} from "../../store/update-property/selectors";
 import {getUrlId} from "../../store/offer-id/selectors";
 
-const Property = (props) => {
-  const {offer, comments, authorizationStatus, isOfferDataLoaded, offerId, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, comment} = props;
 
-  const {bedrooms, description, goods, host, isPremium, maxAdults, price, rating, title, type} = offer;
+const Property = (props) => {
+  const {offer, comments, authorizationStatus, isOfferDataLoaded, offerId, isCommentsLoaded, email, onLoadOfferData, onLoadComments, isAuth, comment, bookMarkOnClick, redirect, item} = props;
+
+  const {bedrooms, description, goods, host, isPremium, isFavorite,
+    maxAdults, price, rating, title, type} = offer;
 
   const rateWidth = Number(Math.round(rating) * ONE_RATE_STAR_PERCENT);
   const urlParams = useParams();
@@ -42,6 +44,10 @@ const Property = (props) => {
       onLoadOfferData();
     }
   }, [isOfferDataLoaded]);
+
+  useEffect(() => {
+    onLoadOfferData();
+  }, [item]);
 
   useEffect(() => {
     onLoadComments();
@@ -102,7 +108,15 @@ const Property = (props) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button onClick={() => {
+                  if (authorizationStatus) {
+                    bookMarkOnClick(urlId);
+                  } else {
+                    redirect();
+                  }
+                }}
+                className={isFavorite ? `property__bookmark-button button property__bookmark-button--active` : `property__bookmark-button button`
+                } type="button">
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -191,7 +205,8 @@ const mapStateToProps = (state) => ({
   comments: getComments(state),
   isCommentsLoaded: getCommentsLoaded(state),
   comment: getComment(state),
-  urlId: getUrlId(state)
+  urlId: getUrlId(state),
+  item: getItem(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -209,6 +224,15 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addComment(comment) {
     dispatch(addComment(comment));
+  },
+  updatedOffer(isFavorite) {
+    dispatch(updatedOffer(isFavorite));
+  },
+  bookMarkOnClick(urlId) {
+    dispatch(addFavorite(urlId));
+  },
+  redirect() {
+    dispatch(redirectToRoute(APP_ROUTE.LOGIN));
   }
 });
 
@@ -224,8 +248,11 @@ Property.propTypes = {
   authorizationStatus: PropTypes.bool.isRequired,
   email: PropTypes.string,
   addComment: PropTypes.func.isRequired,
-  comment: PropTypes.obj,
+  comment: PropTypes.object,
   offerId: PropTypes.func.isRequired,
+  bookMarkOnClick: PropTypes.func.isRequired,
+  redirect: PropTypes.func.isRequired,
+  item: PropTypes.object,
 };
 
 export {Property};
